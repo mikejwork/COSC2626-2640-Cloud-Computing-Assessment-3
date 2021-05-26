@@ -20,7 +20,14 @@ def auth_login(email, password):
         response = db_users.scan(
             FilterExpression=Attr('email').contains(email)
         )
-        return {'result':False,'message':response}
+        if response['Count'] == 0:
+            return {'result':False,'message':'Email not found, Please try again.'}
+        else:
+            if response['Items'][0]['password'] == password:
+                store_cookies(response['Items'][0])
+                return {'result':True,'message':'Success.'}
+            else:
+                return {'result':False,'message':'Password does not match, Please try again.'}
         
         # response = db_users.get_item(
         #     Key={
