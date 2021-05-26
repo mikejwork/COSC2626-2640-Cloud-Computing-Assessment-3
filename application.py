@@ -75,4 +75,8 @@ def login():
     return render_template('login.php')
 # end-home-route
 
+# Home route
 @app.route('/register/', methods=['POST'])
+def register():
+    return render_template('register.php')
+# end-home-route
