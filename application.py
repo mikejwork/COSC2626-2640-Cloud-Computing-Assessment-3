@@ -15,7 +15,6 @@ def auth_login(email, password):
     db_users = dynamodb_resource.Table('users')
     
     if db_users:
-        print("db_users SUCCESS")
         response = db_users.get_item(
             Key={
                 'email': email
@@ -57,7 +56,6 @@ def home():
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
-    print("LOGIN")
     if 'userid' in session:
         return redirect(url_for('home'))
     
@@ -73,7 +71,7 @@ def login():
         
         response = auth_login(form_email, form_password)
         
-        print(response)
+        return render_template('login.php', error_message=response)
     
     return render_template('login.php')
 # end-login-route
