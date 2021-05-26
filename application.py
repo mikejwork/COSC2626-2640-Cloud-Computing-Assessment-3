@@ -24,7 +24,7 @@ def auth_login(email, password):
             item = response['Item']
             
             if item['password'] == password:
-                session['userid'] = str(item['userid'])
+                store_cookies(item)
                 return {'result':True,'message':'Success.'}
             else:
                 return {'result':False,'message':'Password does not match.'}
@@ -32,18 +32,21 @@ def auth_login(email, password):
             return {'result':False,'message':'Email not found, Please try again.'}
     else:
         return {'result':False,'message':'DB Error.'}
+def auth_register(fullname, username, password, email, phonenumber):
+    db_users = dynamodb_resource.Table('users')
     
-# def auth_register(fullname, username, password, email, phonenumber):
-#     db_users = dynamodb_resource.Table('users')
-    
-#     if db_users:
-#         response = db_users.scan(
-#             FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
-#         )
+    if db_users:
+        response = db_users.scan(
+            FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
+        )
         
-#         print(response['Items'])
-#     else:
-#         return {'result':False,'message':'DB Error.'}
+        print(response['Items'])
+    else:
+        return {'result':False,'message':'DB Error.'}
+def store_cookies(item):
+    session['userid'] = str(item['userid'])
+def clear_cookies():
+    session.pop('userid', None)
 # end-functions
 
 
@@ -80,6 +83,16 @@ def login():
     
     return render_template('login.php')
 # end-login-route
+
+# Logout route
+@app.route('/logout/', methods=['POST', 'GET'])
+def logout():
+    if 'userid' in session:
+        clear_cookies()
+        return redirect(url_for('login'))
+    else:
+        return redirect(url_for('login'))
+# end-logout-route
 
 
 # Register route
