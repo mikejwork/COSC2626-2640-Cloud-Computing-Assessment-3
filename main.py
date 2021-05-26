@@ -1,9 +1,9 @@
 #import boto3
-import uuid # str(uuid.uuid4())
+#mport uuid # str(uuid.uuid4())
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask #, render_template, request, redirect, url_for, session
 app = Flask(__name__)
-app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
+# app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 
 #dynamodb_resource = boto3.resource('dynamodb')
 
