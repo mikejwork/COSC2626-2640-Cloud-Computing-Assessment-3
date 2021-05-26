@@ -46,14 +46,14 @@ def register(fullname, username, password, email, phonenumber):
 
 
 # Home route
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def home():
     return render_template('home.php')
 # end-home-route
 
 
 # Login route
-@app.route('/login/', methods=['POST'])
+@app.route('/login/', methods=['POST', 'GET'])
 def login():
     if 'userid' in session:
         return redirect(url_for('home'))
@@ -76,7 +76,7 @@ def login():
 # end-home-route
 
 # Home route
-@app.route('/register/', methods=['POST'])
+@app.route('/register/', methods=['POST', 'GET'])
 def register():
     return render_template('register.php')
 # end-home-route
