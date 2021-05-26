@@ -57,6 +57,7 @@ def home():
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
+    print("LOGIN")
     if 'userid' in session:
         return redirect(url_for('home'))
     
