@@ -6,7 +6,7 @@ application = Flask(__name__)
 app = application
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 
-dynamodb_resource = boto3.resource('dynamodb')
+dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1')
 
 # Functions
 # def login(username, password):
