@@ -45,6 +45,20 @@ def auth_register(fullname, username, password, email, phonenumber):
         print(response['Items'])
     else:
         return {'result':False,'message':'DB Error.'}
+def auth_changepassword(userid, new_password):
+    db_users = dynamodb_resource.Table('users')
+    
+    if db_users:
+        response = db_users.update_item(
+            Key={
+                'userid': userid
+            },
+            UpdateExpression="set password=:password",
+            ExpressionAttributeValues={
+                ':password': new_password
+            },
+            ReturnValues="UPDATED_NEW"
+        )
 def get_user(userid):
     db_users = dynamodb_resource.Table('users')
     
@@ -77,11 +91,23 @@ def profile():
     if 'userid' not in session:
         return redirect(url_for('login'))
     
-    
     user = get_user(session['userid'])
     
     return render_template('profile.php', user=user)
 # end-profile-route
+
+
+
+# Change password route
+@app.route('/changepassword/', methods=['POST', 'GET'])
+def changepassword():
+    if 'userid' not in session:
+        return redirect(url_for('login'))
+    
+    user = get_user(session['userid'])
+    
+    return redirect(url_for('login'))
+# end-change-password-route
 
 
 
