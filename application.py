@@ -8,7 +8,7 @@ app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1')
 
 # Functions
-def login(email, password):
+def auth_login(email, password):
     if 'userid' in session:
         return {'result':False,'message':'You are already logged-in.'}
     
@@ -30,7 +30,7 @@ def login(email, password):
                 return {'result':False,'message':'Password does not match.'}
     else:
         return {'result':False,'message':'DB Error.'}
-def register(fullname, username, password, email, phonenumber):
+def auth_register(fullname, username, password, email, phonenumber):
     db_users = dynamodb_resource.Table('users')
     
     if db_users:
@@ -68,7 +68,7 @@ def login():
         if not form_password:
             return render_template('login.php', error_message="Error: Password field is empty.")
         
-        response = login(form_email, form_password)
+        response = auth_login(form_email, form_password)
         
         print(response)
     
