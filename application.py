@@ -27,7 +27,7 @@ def auth_login(email, password):
                 store_cookies(item)
                 return {'result':True,'message':'Success.'}
             else:
-                return {'result':False,'message':'Password does not match.'}
+                return {'result':False,'message':'Password does not match, Please try again.'}
         else:
             return {'result':False,'message':'Email not found, Please try again.'}
     else:
@@ -58,6 +58,7 @@ def home():
 # end-home-route
 
 
+
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
@@ -84,6 +85,8 @@ def login():
     return render_template('login.php')
 # end-login-route
 
+
+
 # Logout route
 @app.route('/logout/', methods=['POST', 'GET'])
 def logout():
@@ -93,6 +96,7 @@ def logout():
     else:
         return redirect(url_for('login'))
 # end-logout-route
+
 
 
 # Register route
