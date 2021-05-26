@@ -14,22 +14,22 @@ def auth_login(email, password):
     
     db_users = dynamodb_resource.Table('users')
     
-    if db_users:
-        response = db_users.get_item(
-            Key={
-                'email': email
-            }
-        )
-        if 'Item' in response:
-            item = response['Item']
+    # if db_users:
+    #     response = db_users.get_item(
+    #         Key={
+    #             'email': email
+    #         }
+    #     )
+    #     if 'Item' in response:
+    #         item = response['Item']
             
-            if item['password'] == password:
-                session['userid'] = str(item['userid'])
-                return {'result':True,'message':'Success.'}
-            else:
-                return {'result':False,'message':'Password does not match.'}
-    else:
-        return {'result':False,'message':'DB Error.'}
+    #         if item['password'] == password:
+    #             session['userid'] = str(item['userid'])
+    #             return {'result':True,'message':'Success.'}
+    #         else:
+    #             return {'result':False,'message':'Password does not match.'}
+    # else:
+    #     return {'result':False,'message':'DB Error.'}
 # def auth_register(fullname, username, password, email, phonenumber):
 #     db_users = dynamodb_resource.Table('users')
     
