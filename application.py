@@ -1,10 +1,10 @@
-#import boto3
-#mport uuid # str(uuid.uuid4())
+import boto3
+import uuid # str(uuid.uuid4())
 
 from flask import Flask #, render_template, request, redirect, url_for, session
 application = Flask(__name__)
 app = application
-# app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
+app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 
 #dynamodb_resource = boto3.resource('dynamodb')
 
@@ -44,12 +44,6 @@ app = application
 #         return {'result':False,'message':'DB Error.'}
 # end-functions
 
-# Classes
-# class user:
-#     userid = None
-#     username = None
-# end-classes
-
 
 
 # Home route
@@ -57,8 +51,3 @@ app = application
 def home():
     return 'yoooooooooosdasdjhauihfuhasf'
 # end-home-route
-
-
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=8080, debug=True)
