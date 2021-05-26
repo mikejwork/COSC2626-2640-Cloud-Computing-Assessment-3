@@ -15,9 +15,9 @@
     <div class="container" style="color: rgb(255,255,255);padding: 2%;background: rgba(18,18,18,0);border-radius: 15px;font-family: Ubuntu, sans-serif;">
         <div style="margin-bottom: 5%;">
             <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">my profile</h1>
-            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;border-bottom-color: rgb(255,255,255);"><strong>username</strong>:{{user.username}}</p>
-            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;"><strong>email address</strong>:{{user.email}}</p>
-            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;"><strong>phone number</strong>:{{user.phonenumber}}</p>
+            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;border-bottom-color: rgb(255,255,255);"><strong>username</strong>:  {{user.username}}</p>
+            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;"><strong>email address</strong>:  {{user.email}}</p>
+            <p style="font-family: Ubuntu, sans-serif;margin-bottom: 5px;margin-left: 25px;"><strong>phone number</strong>:  {{user.phonenumber}}</p>
         </div>
         <div>
             <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">Change Password</h1>

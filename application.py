@@ -18,7 +18,7 @@ def auth_login(email, password):
     
     if db_users:
         response = db_users.scan(
-            FilterExpression=Attr('email').contains(email)
+            FilterExpression=Attr('email').eq(email)
         )
         if response['Count'] == 0:
             return {'result':False,'message':'Email not found, Please try again.'}
@@ -28,26 +28,30 @@ def auth_login(email, password):
                 return {'result':True,'message':'Success.'}
             else:
                 return {'result':False,'message':'Password does not match, Please try again.'}
-        
-        # response = db_users.get_item(
-        #     Key={
-        #         'email': email
-        #     }
-        # )
-        # if 'Item' in response:
-        #     item = response['Item']
-            
-        #     if item['password'] == password:
-        #         store_cookies(item)
-        #         return {'result':True,'message':'Success.'}
-        #     else:
-        #         return {'result':False,'message':'Password does not match, Please try again.'}
-        # else:
-        #     return {'result':False,'message':'Email not found, Please try again.'}
     else:
         return {'result':False,'message':'DB Error.'}
 def auth_register(fullname, username, password, email, phonenumber):
+    if 'userid' in session:
+        return {'result':False,'message':'You are already logged-in.'}
+    
     db_users = dynamodb_resource.Table('users')
+    
+    if db_users:
+        email_check = db_users.scan(
+            FilterExpression=Attr('email').eq(email)
+        )
+        if email_check['Count'] != 0:
+            return {'result':False,'message':'Email already exists, Please try again.'}
+        else:
+            username_check = db_users.scan(
+                FilterExpression=Attr('username').eq(username)
+            )
+    else:
+        return {'result':False,'message':'DB Error.'}
+    
+    
+    
+    
     
     if db_users:
         response = db_users.scan(
