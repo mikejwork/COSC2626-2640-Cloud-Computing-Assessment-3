@@ -1,12 +1,12 @@
 import boto3
 import uuid # str(uuid.uuid4())
 
-from flask import Flask #, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 application = Flask(__name__)
 app = application
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 
-#dynamodb_resource = boto3.resource('dynamodb')
+dynamodb_resource = boto3.resource('dynamodb')
 
 # Functions
 # def login(username, password):
@@ -49,5 +49,5 @@ app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 # Home route
 @app.route('/')
 def home():
-    return 'yoooooooooosdasdjhauihfuhasf'
+    return render_template('home.php')
 # end-home-route
