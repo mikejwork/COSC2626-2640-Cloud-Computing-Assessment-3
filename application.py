@@ -17,21 +17,26 @@ def auth_login(email, password):
     db_users = dynamodb_resource.Table('users')
     
     if db_users:
-        response = db_users.get_item(
-            Key={
-                'email': email
-            }
+        response = db_users.scan(
+            FilterExpression=Attr('email_address').contains(email)
         )
-        if 'Item' in response:
-            item = response['Item']
+        return {'result':False,'message':response}
+        
+        # response = db_users.get_item(
+        #     Key={
+        #         'email': email
+        #     }
+        # )
+        # if 'Item' in response:
+        #     item = response['Item']
             
-            if item['password'] == password:
-                store_cookies(item)
-                return {'result':True,'message':'Success.'}
-            else:
-                return {'result':False,'message':'Password does not match, Please try again.'}
-        else:
-            return {'result':False,'message':'Email not found, Please try again.'}
+        #     if item['password'] == password:
+        #         store_cookies(item)
+        #         return {'result':True,'message':'Success.'}
+        #     else:
+        #         return {'result':False,'message':'Password does not match, Please try again.'}
+        # else:
+        #     return {'result':False,'message':'Email not found, Please try again.'}
     else:
         return {'result':False,'message':'DB Error.'}
 def auth_register(fullname, username, password, email, phonenumber):
