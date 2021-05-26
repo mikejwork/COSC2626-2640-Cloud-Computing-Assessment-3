@@ -43,6 +43,16 @@ def auth_register(fullname, username, password, email, phonenumber):
         print(response['Items'])
     else:
         return {'result':False,'message':'DB Error.'}
+def get_user(userid):
+    db_users = dynamodb_resource.Table('users')
+    
+    response = db_users.scan(
+        FilterExpression=Attr('userid').contains(str(userid))
+    )
+    if response['Items']:
+        return response['Items'][0]
+    else:
+        return 'nil'
 def store_cookies(item):
     session['userid'] = str(item['userid'])
 def clear_cookies():
@@ -56,6 +66,20 @@ def clear_cookies():
 def home():
     return render_template('home.php')
 # end-home-route
+
+
+
+# Profile route
+@app.route('/profile/', methods=['POST', 'GET'])
+def profile():
+    if 'userid' not in session:
+        return redirect(url_for('login'))
+    
+    
+    user = get_user(session['userid'])
+    
+    return render_template('profile.php', user=user)
+# end-profile-route
 
 
 
