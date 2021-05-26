@@ -30,17 +30,17 @@ def auth_login(email, password):
                 return {'result':False,'message':'Password does not match.'}
     else:
         return {'result':False,'message':'DB Error.'}
-def auth_register(fullname, username, password, email, phonenumber):
-    db_users = dynamodb_resource.Table('users')
+# def auth_register(fullname, username, password, email, phonenumber):
+#     db_users = dynamodb_resource.Table('users')
     
-    if db_users:
-        response = db_users.scan(
-            FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
-        )
+#     if db_users:
+#         response = db_users.scan(
+#             FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
+#         )
         
-        print(response['Items'])
-    else:
-        return {'result':False,'message':'DB Error.'}
+#         print(response['Items'])
+#     else:
+#         return {'result':False,'message':'DB Error.'}
 # end-functions
 
 
@@ -73,10 +73,11 @@ def login():
         print(response)
     
     return render_template('login.php')
-# end-home-route
+# end-login-route
 
-# Home route
+
+# Register route
 @app.route('/register/', methods=['POST', 'GET'])
 def register():
     return render_template('register.php')
-# end-home-route
+# end-register-route
