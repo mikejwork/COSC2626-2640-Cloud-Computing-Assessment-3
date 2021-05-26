@@ -15,7 +15,7 @@
 
 <body style="background: linear-gradient(rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5)), url(&quot;https://i.imgur.com/BxYs9Tw.jpg&quot;) center / cover;">
     <nav class="navbar navbar-light navbar-expand-md" style="background: #121212;font-family: Roboto, sans-serif;border-bottom-color: rgb(255,255,255);padding-right: 10%;padding-left: 10%;">
-        <div class="container-fluid"><a class="navbar-brand" href="#" style="color: rgb(225,225,225);font-family: Ubuntu, sans-serif;">portfol.io</a>
+        <div class="container-fluid"><a class="navbar-brand" href="/" style="color: rgb(225,225,225);font-family: Ubuntu, sans-serif;">portfol.io</a>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
 

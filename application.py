@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, redirect, url_for, session
 application = Flask(__name__)
 app = application
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
-
 dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1')
 
 # Functions
@@ -50,4 +49,24 @@ dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1')
 @app.route('/')
 def home():
     return render_template('home.php')
+# end-home-route
+
+
+# Login route
+@app.route('/login/')
+def login():
+    if 'userid' in session:
+        return redirect(url_for('home'))
+    
+    if request.method == "POST":
+        form_email = request.form['email_field']
+        form_password = request.form['password_field']
+        
+        if not form_email:
+            return render_template('login.php', error_message="Error: Email field is empty.")
+
+        if not form_password:
+            return render_template('login.php', error_message="Error: Password field is empty.")
+    
+    return render_template('login.php')
 # end-home-route
