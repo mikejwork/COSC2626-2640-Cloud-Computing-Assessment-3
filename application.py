@@ -8,39 +8,39 @@ app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1')
 
 # Functions
-# def login(username, password):
-#     if 'userid' in session:
-#         return {'result':False,'message':'You are already logged-in.'}
+def login(email, password):
+    if 'userid' in session:
+        return {'result':False,'message':'You are already logged-in.'}
     
-#     db_users = dynamodb_resource.Table('users')
+    db_users = dynamodb_resource.Table('users')
     
-#     if db_users:
-#         response = db_users.get_item(
-#             Key={
-#                 'username': username
-#             }
-#         )
-#         if 'Item' in response:
-#             item = response['Item']
+    if db_users:
+        response = db_users.get_item(
+            Key={
+                'email': email
+            }
+        )
+        if 'Item' in response:
+            item = response['Item']
             
-#             if item['password'] == password:
-#                 session['userid'] = str(item['userid'])
-#                 return {'result':True,'message':'Success.'}
-#             else:
-#                 return {'result':False,'message':'Password does not match.'}
-#     else:
-#         return {'result':False,'message':'DB Error.'}
-# def register(username, password, email, phonenumber):
-#     db_users = dynamodb_resource.Table('users')
+            if item['password'] == password:
+                session['userid'] = str(item['userid'])
+                return {'result':True,'message':'Success.'}
+            else:
+                return {'result':False,'message':'Password does not match.'}
+    else:
+        return {'result':False,'message':'DB Error.'}
+def register(fullname, username, password, email, phonenumber):
+    db_users = dynamodb_resource.Table('users')
     
-#     if db_users:
-#         response = db_users.scan(
-#             FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
-#         )
+    if db_users:
+        response = db_users.scan(
+            FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
+        )
         
-#         print(response['Items'])
-#     else:
-#         return {'result':False,'message':'DB Error.'}
+        print(response['Items'])
+    else:
+        return {'result':False,'message':'DB Error.'}
 # end-functions
 
 
@@ -53,7 +53,7 @@ def home():
 
 
 # Login route
-@app.route('/login/')
+@app.route('/login/', methods=['POST'])
 def login():
     if 'userid' in session:
         return redirect(url_for('home'))
@@ -67,6 +67,16 @@ def login():
 
         if not form_password:
             return render_template('login.php', error_message="Error: Password field is empty.")
+        
+        response = login(form_email, form_password)
+        
+        print(response)
     
     return render_template('login.php')
+# end-home-route
+
+# Home route
+@app.route('/register/', methods=['POST'])
+def register():
+    return render_template('register.php')
 # end-home-route
