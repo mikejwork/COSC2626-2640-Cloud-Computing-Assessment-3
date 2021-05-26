@@ -2,7 +2,7 @@
 #mport uuid # str(uuid.uuid4())
 
 from flask import Flask #, render_template, request, redirect, url_for, session
-app = Flask(__name__)
+application = Flask(__name__)
 # app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 
 #dynamodb_resource = boto3.resource('dynamodb')
@@ -52,7 +52,7 @@ app = Flask(__name__)
 
 
 # Home route
-@app.route('/', methods=['POST', 'GET'])
+@application.route('/', methods=['POST', 'GET'])
 def home():
     
     return 'yoooooooooosdasdjhauihfuhasf'
