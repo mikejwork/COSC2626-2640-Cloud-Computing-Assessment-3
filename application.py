@@ -18,7 +18,7 @@ def auth_login(email, password):
     
     if db_users:
         response = db_users.scan(
-            FilterExpression=Attr('email_address').contains(email)
+            FilterExpression=Attr('email').contains(email)
         )
         return {'result':False,'message':response}
         
