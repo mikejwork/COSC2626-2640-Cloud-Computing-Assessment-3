@@ -28,6 +28,8 @@ def auth_login(email, password):
                 return {'result':True,'message':'Success.'}
             else:
                 return {'result':False,'message':'Password does not match.'}
+        else:
+            return {'result':False,'message':'Email not found, Please try again.'}
     else:
         return {'result':False,'message':'DB Error.'}
     
@@ -71,7 +73,10 @@ def login():
         
         response = auth_login(form_email, form_password)
         
-        return render_template('login.php', error_message=response)
+        if response['result'] == False:
+            return render_template('login.php', error_message=response['message'])
+        else:
+            return redirect(url_for('home'))
     
     return render_template('login.php')
 # end-login-route
