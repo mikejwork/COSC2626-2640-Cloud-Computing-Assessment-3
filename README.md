@@ -12,3 +12,7 @@ From previous assessments within this subject i have become more confident with 
 I have changed my previous outlook on the assessment from an online store to a budgeting application, to track bank accounts
 and savings, also enabling the user to input the stocks that they own, using a third party API be able to get prices of these stocks
 and show a live price of their assets to the user.
+
+## AWS Features / Plan
+I will be hosting the site on AWS Elastic beanstalk which will automatically handle scaling and load balancing for me.
+The site will be hosted on an EC2 Instance with Python Flask, using external market APIs, Javascript graph libraries, and more utilities from AWS
