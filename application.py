@@ -1,6 +1,8 @@
 import boto3
 import uuid # str(uuid.uuid4())
 
+from botocore.exceptions import ClientError
+from boto3.dynamodb.conditions import Key, Attr
 from flask import Flask, render_template, request, redirect, url_for, session
 application = Flask(__name__)
 app = application
