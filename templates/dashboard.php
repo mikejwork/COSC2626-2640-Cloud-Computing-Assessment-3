@@ -66,7 +66,8 @@
                         xaxis: {
                             labels: {
                                 show: false
-                            }
+                            },
+                            min: 700 
                         },
                         yaxis: {
                             opposite: true,
@@ -80,8 +81,7 @@
                             x: {
                                 show: false
                             }
-                        },
-                        min: 200 
+                        }
                     }
                     var chart = new ApexCharts(document.querySelector("#{{item['currency_code']}}"), options);
                     chart.render();
