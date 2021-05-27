@@ -15,7 +15,13 @@
             <div style="margin-bottom: 5%;">
                 <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;margin-bottom: 5px;">my dashboard</h1>
                 <p style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</p>
-                <p style="color:white;">{{debug}}</p>
+
+                {% for item in debug %}
+
+                    <p style="color:white;">{{item['currency_code']}}</p>
+                    <p style="color:white;">{{item['amount_owned']}}</p>
+
+                {% endfor %}
             </div>
         </div>
         <div class="container">
