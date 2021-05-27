@@ -92,9 +92,7 @@
 
             {% endfor %}
 
-                
-
-                <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
+                <div class="col-auto col-md-3" style="margin-top:-2px; margin-bottom:-2px; color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;">Add a new position</p>
                     </div>
