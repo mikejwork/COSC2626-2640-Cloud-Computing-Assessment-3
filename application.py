@@ -107,7 +107,10 @@ def clear_cookies():
 def get_pricedata(currency_code):
     db_stockdata = dynamodb_resource.Table('stockData')
     response = db_stockdata.scan(FilterExpression=Attr('currency_code').eq(currency_code))
-    return response['Items'][0]
+    if response['Count'] == 0:
+        return "nil"
+    else:
+        return response['Items'][0]
 def get_change(current, previous):
     if current == previous:
         return 100.0
