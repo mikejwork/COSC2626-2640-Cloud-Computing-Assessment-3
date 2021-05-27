@@ -20,19 +20,19 @@
         <div class="container">
             <div class="row g-0 d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
 
-            {% for item in debug %}
+            {% for item in stock_data %}
 
                 <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa fa-long-arrow-down" style="margin-right: 5px;"></i>-12.45%</p>
+                            <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa fa-long-arrow-down" style="margin-right: 5px;"></i>{{ get_change(item['pricedata']['prices'][0], item['pricedata']['prices'][1]) }}%</p>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$42,201.37</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['amount_owned'] * item['pricedata']['prices'][0] }}</strong></p>
                         </div>
                     </div>
                     <div id="{{item['currency_code']}}" style="margin: 0px;height: 100px;"></div>
@@ -43,7 +43,7 @@
                         chart: {
                             type: 'area',
                             zoom: {
-                                enabled: true
+                                enabled: false
                             },
                             toolbar: {
                                 show: false

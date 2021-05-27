@@ -108,6 +108,13 @@ def get_pricedata(currency_code):
     db_stockdata = dynamodb_resource.Table('stockData')
     response = db_stockdata.scan(FilterExpression=Attr('currency_code').eq(currency_code))
     return response['Items'][0]
+def get_change(current, previous):
+    if current == previous:
+        return 100.0
+    try:
+        return (abs(current - previous) / previous) * 100.0
+    except ZeroDivisionError:
+        return 0
 # end-functions
 
 
@@ -205,7 +212,7 @@ def dashboard():
     
     
     
-    return render_template('dashboard.php', debug=stock_data['data'])
+    return render_template('dashboard.php', stock_data=stock_data['data'])
 # end-dashboard-route
 
 
