@@ -212,7 +212,7 @@ def dashboard():
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
             "pricedata": pricedata,
-            "percentage_change": get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])), #round(get_change(float(pricedata['prices'][0]), float(pricedata['prices'][1])), 2),
+            "percentage_change": get_change(float(55.23), float(10.23)),#get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])),
             "equity": round(float(item['amount_owned']) * float(pricedata['prices'][0]), 2)
         })
     
