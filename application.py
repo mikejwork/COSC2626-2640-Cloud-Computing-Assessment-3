@@ -205,7 +205,7 @@ def dashboard():
     
     
     
-    return render_template('dashboard.php', debug=stock_data)
+    return render_template('dashboard.php', debug=stock_data['data'])
 # end-dashboard-route
 
 
