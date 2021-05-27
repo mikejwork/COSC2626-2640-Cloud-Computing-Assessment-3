@@ -26,13 +26,13 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa {% if item['percentage_change'] < 0.0 %}fa-long-arrow-down{% else %}fa-long-arrow-up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
+                            <p style="margin-bottom: 0px;color: {% if item['percentage_change'] < 0.0 %}rgba(224,48,24,0.85);{% else %}rgba(40,224,24,0.85);{% endif %}"><i class="fa {% if item['percentage_change'] < 0.0 %}fa-long-arrow-down{% else %}fa-long-arrow-up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}}</strong></p>
+                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}} {{item['currency_code']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['equity'] }}</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['equity'] }} AUD</strong></p>
                         </div>
                     </div>
                     <div id="{{item['currency_code']}}" style="margin: 0px;height: 100px;"></div>
