@@ -111,11 +111,11 @@ def get_pricedata(currency_code):
         return "nil"
     else:
         return response['Items'][0]
-def get_change(current, previous):
+def get_change(previous, current):
     if current == previous:
         return 100.0
     try:
-        return (abs(current - previous) / previous) * 100.0
+        return round(float(((current - previous) * 100) / previous), 2)
     except ZeroDivisionError:
         return 0
 # end-functions
@@ -212,7 +212,7 @@ def dashboard():
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
             "pricedata": pricedata,
-            "percentage_change": round(get_change(float(12.13), float(55.23)), 2),#round(get_change(float(pricedata['prices'][0]), float(pricedata['prices'][1])), 2),
+            "percentage_change": get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])), #round(get_change(float(pricedata['prices'][0]), float(pricedata['prices'][1])), 2),
             "equity": round(float(item['amount_owned']) * float(pricedata['prices'][0]), 2)
         })
     
