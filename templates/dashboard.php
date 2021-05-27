@@ -10,6 +10,7 @@
 
 
 {% block body %}
+    <p>{{user}}</p>
     <section style="padding: 15%;font-family: Ubuntu, sans-serif;border-top: 1px inset rgba(255,255,255,0.07);padding-top: 0px;">
         <div class="container" style="color: rgb(255,255,255);padding: 2%;background: rgba(18,18,18,0);border-radius: 15px;font-family: Roboto, sans-serif;padding-bottom: 0px;padding-left: 10%;padding-right: 10%;">
             <div style="margin-bottom: 5%;">

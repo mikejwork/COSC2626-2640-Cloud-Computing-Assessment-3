@@ -187,7 +187,12 @@ def dashboard():
     if 'userid' not in session:
         return redirect(url_for('login'))
     
-    return render_template('dashboard.php')
+    user = get_user(session['userid'])
+    db_stockdata = dynamodb_resource.Table('stockData')
+    
+    stock_data = {}
+    
+    return render_template('dashboard.php', user=user)
 # end-dashboard-route
 
 
