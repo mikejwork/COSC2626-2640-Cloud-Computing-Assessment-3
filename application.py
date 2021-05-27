@@ -204,10 +204,12 @@ def dashboard():
     
     
     for item in user['stocks']:
+        pricedata = get_pricedata(item['currency_code'])['price_data']
         stock_data['data'].append({
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
-            "pricedata": get_pricedata(item['currency_code'])['price_data']
+            "pricedata": pricedata,
+            "percentage_change": get_change(pricedata['prices'][0], pricedata['prices'][1])
         })
     
     
