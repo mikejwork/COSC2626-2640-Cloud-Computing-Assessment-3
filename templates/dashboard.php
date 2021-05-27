@@ -143,10 +143,10 @@
 <script>
     var options = {
           series: [{
-          name: "STOCK ABC",
+          name: "BTC",
           data: [123, 22, 313, 322, 311, 266, 255, 244, 277, 322, 255, 155]
         }],
-          chart: {
+        chart: {
           type: 'area',
           height: 350,
           zoom: {
@@ -158,15 +158,6 @@
         },
         stroke: {
           curve: 'straight'
-        },
-        
-        title: {
-          text: 'Fundamental Analysis of Stocks',
-          align: 'left'
-        },
-        subtitle: {
-          text: 'Price Movements',
-          align: 'left'
         },
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         xaxis: {
