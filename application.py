@@ -206,21 +206,23 @@ def register():
         form_password = request.form['password_field']
         
         if not form_email:
-            return render_template('login.php', error_message="Error: Email field is empty.")
+            return render_template('register.php', error_message="Error: Email field is empty.")
         
         if not fullname_field:
-            return render_template('login.php', error_message="Error: Full name field is empty.")
+            return render_template('register.php', error_message="Error: Full name field is empty.")
         
         if not username_field:
-            return render_template('login.php', error_message="Error: Username field is empty.")
+            return render_template('register.php', error_message="Error: Username field is empty.")
         
         if not phonenumber_field:
-            return render_template('login.php', error_message="Error: Phonenumber field is empty.")
+            return render_template('register.php', error_message="Error: Phonenumber field is empty.")
 
         if not form_password:
-            return render_template('login.php', error_message="Error: Password field is empty.")
+            return render_template('register.php', error_message="Error: Password field is empty.")
         
         response = auth_register(fullname_field, username_field, form_password, form_email, phonenumber_field)
+        
+        return render_template('register.php', error_message=response)
         
         if response['result'] == False:
             return render_template('register.php', error_message=response['message'])
