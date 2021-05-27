@@ -104,6 +104,10 @@ def store_cookies(item):
     session['userid'] = str(item['userid'])
 def clear_cookies():
     session.pop('userid', None)
+def get_pricedata(currency_code):
+    db_stockdata = dynamodb_resource.Table('stockData')
+    response = db_stockdata.scan(FilterExpression=Attr('currency_code').eq(currency_code))
+    return response['Items'][0]
 # end-functions
 
 
@@ -190,18 +194,18 @@ def dashboard():
     
     stock_data = {"data":[]}
     user = get_user(session['userid'])
-    db_stockdata = dynamodb_resource.Table('stockData')
-    response = db_stockdata.scan()
+    
     
     for item in user['stocks']:
         stock_data['data'].append({
             "currency_code": item['currency_code'],
-            "amount_owned": item['amount_owned']
+            "amount_owned": item['amount_owned'],
+            "pricedata": get_pricedata(item['currency_code'])
         })
     
     
     
-    return render_template('dashboard.php', debug=response)
+    return render_template('dashboard.php', debug=stock_data)
 # end-dashboard-route
 
 
