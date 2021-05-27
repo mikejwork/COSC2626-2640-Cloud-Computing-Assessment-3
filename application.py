@@ -205,18 +205,15 @@ def dashboard():
     stock_data = {"data":[]}
     user = get_user(session['userid'])
     
-    
     for item in user['stocks']:
         pricedata = get_pricedata(item['currency_code'])['price_data']
         stock_data['data'].append({
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
             "pricedata": pricedata,
-            "percentage_change": get_change(float(55.23), float(10.23)),#get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])),
+            "percentage_change": get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])),
             "equity": round(float(item['amount_owned']) * float(pricedata['prices'][0]), 2)
         })
-    
-    
     
     return render_template('dashboard.php', stock_data=stock_data['data'])
 # end-dashboard-route
