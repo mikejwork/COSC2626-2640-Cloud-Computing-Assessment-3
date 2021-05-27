@@ -191,6 +191,7 @@ def dashboard():
     stock_data = {"data":[]}
     user = get_user(session['userid'])
     db_stockdata = dynamodb_resource.Table('stockData')
+    response = db_stockdata.scan()
     
     for item in user['stocks']:
         stock_data['data'].append({
@@ -200,7 +201,7 @@ def dashboard():
     
     
     
-    return render_template('dashboard.php', debug=stock_data)
+    return render_template('dashboard.php', debug=response)
 # end-dashboard-route
 
 
