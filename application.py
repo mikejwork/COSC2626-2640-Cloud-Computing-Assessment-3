@@ -144,9 +144,14 @@ def changepassword():
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
 @app.route('/login/<email>')
-def login(email=''):
+def login(email='no'):
     if 'userid' in session:
         return redirect(url_for('home'))
+    
+    if email == 'yes':
+        if request.method == "POST":
+            form_email = request.form['email_field']
+            return render_template('login.php', email=form_email)
     
     if request.method == "POST":
         form_email = request.form['email_field']
@@ -165,7 +170,7 @@ def login(email=''):
         else:
             return redirect(url_for('home'))
     
-    return render_template('login.php', email=email)
+    return render_template('login.php')
 # end-login-route
 
 
