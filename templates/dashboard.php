@@ -15,33 +15,79 @@
             <div style="margin-bottom: 5%;">
                 <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;margin-bottom: 5px;">my dashboard</h1>
                 <p style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</p>
-
-                {% for item in debug %}
-
-                    <p style="color:white;">{{item['currency_code']}}</p>
-                    <p style="color:white;">{{item['amount_owned']}}</p>
-
-                {% endfor %}
             </div>
         </div>
         <div class="container">
             <div class="row g-0 d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
 
+            {% for item in debug %}
+
                 <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;">BTC $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
+                        <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa fa-long-arrow-down" style="margin-right: 5px;"></i>-12.45%</p>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(48,105,217,0.85);"><strong>68.54%</strong></p>
+                        <p style="margin-bottom: 0px;color: rgba(48,105,217,0.85);"><strong>{{item['amount_owned']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$42,201.37</strong></p>
                         </div>
                     </div>
-                    <div id="chart" style="margin: 0px;height: 100px;"></div>
+                    <div id="{{item['currency_code']}}" style="margin: 0px;height: 100px;"></div>
                 </div>
+
+                <script>
+                    var options = {
+                        chart: {
+                            type: 'area',
+                            zoom: {
+                                enabled: false
+                            },
+                            toolbar: {
+                                show: false
+                            },
+                            sparkline: {
+                                enabled: false
+                            }
+                        },
+                        series: [{
+                            name: '{{item["currency_code"]}} $ AUD',
+                            data: {{item['pricedata']['prices']}}
+                        }],
+                        dataLabels: {
+                            enabled: false
+                        },
+                        labels: {{item['pricedata']['dates']}},
+                        grid: {
+                            show: false
+                        },
+                        xaxis: {
+                            labels: {
+                                show: false
+                            }
+                        },
+                        yaxis: {
+                            opposite: true,
+                            labels: {
+                                show: true
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            theme: "dark",
+                            x: {
+                                show: false
+                            }
+                        }
+                    }
+                    var chart = new ApexCharts(document.querySelector("#{{item['currency_code']}}"), options);
+                    chart.render();
+                </script>
+
+            {% endfor %}
+
                 
 
                 <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
@@ -93,52 +139,4 @@
             </div>
         </div>
     </section>
-
-<script>
-    var options = {
-        chart: {
-            type: 'area',
-            zoom: {
-                enabled: false
-            },
-            toolbar: {
-                show: false
-            },
-            sparkline: {
-                enabled: false
-            }
-        },
-        series: [{
-            name: 'BTC $ AUD',
-            data: [2, 11, 44, 77, 99, 130, 170, 260, 400, 510, 590, 754, 800, 1202, 1500]
-        }],
-        dataLabels: {
-            enabled: false
-        },
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        grid: {
-            show: false
-        },
-        xaxis: {
-            labels: {
-                show: false
-            }
-        },
-        yaxis: {
-            opposite: true,
-            labels: {
-                show: true
-            }
-        },
-        tooltip: {
-            enabled: true,
-            theme: "dark",
-            x: {
-                show: false
-            }
-        }
-    }
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-</script>
 {% endblock %}
