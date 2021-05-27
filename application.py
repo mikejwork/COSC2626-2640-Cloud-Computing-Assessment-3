@@ -1,5 +1,6 @@
 import boto3
 import uuid # str(uuid.uuid4())
+import json
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -187,12 +188,16 @@ def dashboard():
     if 'userid' not in session:
         return redirect(url_for('login'))
     
+    test = []
     user = get_user(session['userid'])
     db_stockdata = dynamodb_resource.Table('stockData')
     
+    for item in user['stocks'][0].items():
+        test.append(item)
+    
     stock_data = {}
     
-    return render_template('dashboard.php', debug=user['stocks'])
+    return render_template('dashboard.php', debug=test)
 # end-dashboard-route
 
 
