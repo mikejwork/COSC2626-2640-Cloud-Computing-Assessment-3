@@ -16,7 +16,7 @@
         <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">sign-up</h1>
         <p style="font-family: Ubuntu, sans-serif;">Enter your details below to create an account.</p>
 
-        <form style="margin-bottom: 5px;">
+        <form action="/register/" method="POST" style="margin-bottom: 5px;">
             <input id="email_field" name="email_field" class="form-control" type="email" style="width: 40%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 10px;" placeholder="Email address">
             <input id="fullname_field" name="fullname_field" class="form-control" type="text" style="width: 40%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 10px;" placeholder="Full name">
             <input id="username_field" name="username_field" class="form-control" type="text" style="width: 40%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 10px;" placeholder="Username">

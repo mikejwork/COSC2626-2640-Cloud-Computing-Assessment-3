@@ -195,5 +195,37 @@ def dashboard():
 # Register route
 @app.route('/register/', methods=['POST', 'GET'])
 def register():
+    if 'userid' in session:
+        return redirect(url_for('home'))
+    
+    if request.method == "POST":
+        form_email = request.form['email_field']
+        fullname_field = request.form['fullname_field']
+        username_field = request.form['username_field']
+        phonenumber_field = request.form['phonenumber_field']
+        form_password = request.form['password_field']
+        
+        if not form_email:
+            return render_template('login.php', error_message="Error: Email field is empty.")
+        
+        if not fullname_field:
+            return render_template('login.php', error_message="Error: Full name field is empty.")
+        
+        if not username_field:
+            return render_template('login.php', error_message="Error: Username field is empty.")
+        
+        if not phonenumber_field:
+            return render_template('login.php', error_message="Error: Phonenumber field is empty.")
+
+        if not form_password:
+            return render_template('login.php', error_message="Error: Password field is empty.")
+        
+        response = auth_register(fullname_field, username_field, form_password, form_email, phonenumber_field)
+        
+        if response['result'] == False:
+            return render_template('register.php', error_message=response['message'])
+        else:
+            return redirect(url_for('login'))
+    
     return render_template('register.php')
 # end-register-route
