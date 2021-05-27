@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(48,105,217,0.85);"><strong>{{item['amount_owned']}}</strong></p>
+                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$42,201.37</strong></p>
                         </div>
@@ -43,7 +43,7 @@
                         chart: {
                             type: 'area',
                             zoom: {
-                                enabled: false
+                                enabled: true
                             },
                             toolbar: {
                                 show: false
@@ -71,7 +71,7 @@
                         yaxis: {
                             opposite: true,
                             labels: {
-                                show: true
+                                show: false
                             }
                         },
                         tooltip: {
