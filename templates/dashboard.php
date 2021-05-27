@@ -82,44 +82,49 @@
     </section>
 
 <script>
- 	var options = {
-		chart: {
-			type: 'area',
-			zoom: {
-				enabled: false
-			},
-			toolbar: {
-				show: false
-			},
-			sparkline: {
-    			enabled: false
-			}
-		},
-		series: [{
-			name: 'BTC $ AUD',
-			data: [123, 22, 313, 322, 311, 266, 255, 244, 277, 322, 255, 155]
-		}],
-		dataLabels: {
-			enabled: false
-		},
-		labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-		grid: {
-			show: false
-		},
-		xaxis: {
-			labels: {
-				show: true
-			}
-		},
-		yaxis: {
-			labels: {
-				show: false
-			}
-		},
-        tooltip: {
+    var options = {
+        chart: {
+            type: 'area',
+            zoom: {
+                enabled: false
+            },
+            toolbar: {
+                show: false
+            },
+            sparkline: {
+                enabled: false
+            }
+        },
+        series: [{
+            name: 'BTC $ AUD',
+            data: [123, 22, 313, 322, 311, 266, 255, 244, 277, 322, 255, 155]
+        }],
+        dataLabels: {
             enabled: false
+        },
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        grid: {
+            show: false
+        },
+        xaxis: {
+            labels: {
+                show: false
+            }
+        },
+        yaxis: {
+            opposite: true,
+            labels: {
+                show: true
+            }
+        },
+        tooltip: {
+            enabled: true,
+            theme: "dark",
+            x: {
+                show: false
+            }
         }
-	}
+    }
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
 </script>

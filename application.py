@@ -222,8 +222,6 @@ def register():
         
         response = auth_register(fullname_field, username_field, form_password, form_email, phonenumber_field)
         
-        return render_template('register.php', error_message=response)
-        
         if response['result'] == False:
             return render_template('register.php', error_message=response['message'])
         else:
