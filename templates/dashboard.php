@@ -80,7 +80,8 @@
                             x: {
                                 show: false
                             }
-                        }
+                        },
+                        max: 200 
                     }
                     var chart = new ApexCharts(document.querySelector("#{{item['currency_code']}}"), options);
                     chart.render();
