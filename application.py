@@ -1,5 +1,6 @@
 import boto3
 import uuid # str(uuid.uuid4())
+import requests
 import json
 
 from botocore.exceptions import ClientError
@@ -235,6 +236,10 @@ def addstock():
 
         if not amount_owned:
             return redirect(url_for('dashboard'))
+        
+        response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
+        
+        return render_template('dashboard.php', debug=response)
     
     return redirect(url_for('dashboard'))
 # end-add-stock-route

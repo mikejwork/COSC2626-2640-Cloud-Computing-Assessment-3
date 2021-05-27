@@ -13,7 +13,7 @@
 
 <section style="padding: 15%;font-family: Ubuntu, sans-serif;border-top: 1px inset rgba(255,255,255,0.07);">
     <div class="container" style="color: rgb(255,255,255);padding: 2%;background: rgba(18,18,18,0);border-radius: 15px;font-family: Ubuntu, sans-serif;">
-        <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">sign-up</h1>
+        <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">Sign-up</h1>
         <p style="font-family: Ubuntu, sans-serif;">Enter your details below to create an account.</p>
 
         <form action="/register/" method="POST" style="margin-bottom: 5px;">
