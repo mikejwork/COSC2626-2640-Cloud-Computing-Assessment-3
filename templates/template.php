@@ -13,27 +13,27 @@
 
 <body style="background: linear-gradient(rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.8)), url(&quot;https://i.imgur.com/BxYs9Tw.jpg&quot;) center / cover;">
     <nav class="navbar navbar-light navbar-expand-md" style="background: #121212;font-family: Ubuntu, sans-serif;border-bottom-color: rgb(255,255,255);padding-right: 10%;padding-left: 10%;">
-        <div class="container-fluid"><a class="navbar-brand" href="/" style="color: rgb(225,225,225);font-family: Ubuntu, sans-serif;">portfol.io</a>
+        <div class="container-fluid"><a class="navbar-brand" href="/" style="color: rgb(225,225,225);font-family: Ubuntu, sans-serif;">Portfol.io</a>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
 
                     {% if session['userid'] %}
                         <li class="nav-item">
-                            <a class="nav-link active" href="/dashboard/" style="color: rgba(225,255,255,0.6);">dashboard</a>
+                            <a class="nav-link active" href="/dashboard/" style="color: rgba(225,255,255,0.6);">Dashboard</a>
                         </li>
 
                         <li class="nav-item font-monospace">
-                            <a class="nav-link" href="/profile/" style="color: rgba(225,255,255,0.6);">profile</a>
+                            <a class="nav-link" href="/profile/" style="color: rgba(225,255,255,0.6);">Profile</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout/" style="color: rgba(225,255,255,0.3);">logout</a>
+                            <a class="nav-link" href="/logout/" style="color: rgba(225,255,255,0.3);">Logout</a>
                         </li>
                     {% endif %}
 
                     {% if not session['userid'] %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/login/" style="color: rgba(225,225,225,0.3);">login / sign-up</a>
+                            <a class="nav-link" href="/login/" style="color: rgba(225,225,225,0.3);">Login / Sign-up</a>
                         </li>
                     {% endif %}
                 </ul>

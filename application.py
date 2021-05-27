@@ -231,12 +231,12 @@ def addstock():
         amount_owned = request.form['amount_owned']
         
         if not stock_code:
-            return render_template('dashboard.php')
+            return redirect(url_for('dashboard'))
 
         if not amount_owned:
-            return render_template('dashboard.php')
+            return redirect(url_for('dashboard'))
     
-    return render_template('dashboard.php')
+    return redirect(url_for('dashboard'))
 # end-add-stock-route
 
 
