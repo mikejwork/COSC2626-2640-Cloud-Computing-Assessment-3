@@ -142,17 +142,43 @@
 
 <script>
     var options = {
-    chart: {
-        type: 'bar'
-    },
-    series: [{
-        name: 'sales',
-        data: [30,40,45,50,49,60,70,91,125]
-    }],
-    xaxis: {
-        categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
-    }
-    }
+          series: [{
+          name: "STOCK ABC",
+          data: [123, 22, 313, 322, 311, 266, 255, 244, 277, 322, 255, 155]
+        }],
+          chart: {
+          type: 'area',
+          height: 350,
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        
+        title: {
+          text: 'Fundamental Analysis of Stocks',
+          align: 'left'
+        },
+        subtitle: {
+          text: 'Price Movements',
+          align: 'left'
+        },
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        xaxis: {
+          type: 'datetime',
+        },
+        yaxis: {
+          opposite: true
+        },
+        legend: {
+          horizontalAlign: 'left'
+        }
+    };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
 
