@@ -192,7 +192,7 @@ def dashboard():
     user = get_user(session['userid'])
     db_stockdata = dynamodb_resource.Table('stockData')
     
-    for item in user['stocks'].items():
+    for item in user['stocks']:
         stock_data['data'].append(item)
     
     
