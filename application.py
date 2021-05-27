@@ -143,7 +143,7 @@ def changepassword():
 
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
-@app.route('/login/<email>')
+@app.route('/login/<email>', methods=['POST', 'GET'])
 def login(email='no'):
     if 'userid' in session:
         return redirect(url_for('home'))
