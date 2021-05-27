@@ -8,6 +8,7 @@ application = Flask(__name__)
 app = application
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1', aws_access_key_id="AKIAQMIDYSWEMRZJYWVT", aws_secret_access_key="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")
+lambda_client = boto3.client('lambda')
 
 # Functions
 def auth_login(email, password):

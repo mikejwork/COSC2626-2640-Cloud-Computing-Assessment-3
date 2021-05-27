@@ -4,7 +4,59 @@
 {% block head %}
 
 <title>portfol.io - dashboard</title>
-
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+  var dataPoints = [];
+  var stockChart = new CanvasJS.StockChart("stockChartContainer", {
+    exportEnabled: true,
+    title: {
+      text:"StockChart with Line using JSON Data"
+    },
+    subtitles: [{
+      text:"Total Retail Sales of ACME "
+    }],
+    charts: [{
+      axisX: {
+        crosshair: {
+          enabled: true,
+          snapToDataPoint: true,
+          valueFormatString: "MMM YYYY"
+        }
+      },
+      axisY: {
+        title: "Million of Dollars",
+        prefix: "$",
+        suffix: "M",
+        crosshair: {
+          enabled: true,
+          snapToDataPoint: true,
+          valueFormatString: "$#,###.00M",
+        }
+      },
+      data: [{
+        type: "line",
+        xValueFormatString: "MMM YYYY",
+        yValueFormatString: "$#,###.##M",
+        dataPoints : dataPoints
+      }]
+    }],
+    navigator: {
+      slider: {
+        minimum: new Date(2010, 00, 01),
+        maximum: new Date(2018, 00, 01)
+      }
+    }
+  });
+  $.getJSON("https://canvasjs.com/data/gallery/stock-chart/grocery-sales.json", function(data) {
+    for(var i = 0; i < data.length; i++){
+      dataPoints.push({x: new Date(data[i].date), y: Number(data[i].sale)});
+    }
+    stockChart.render();
+  });
+}
+</script>
 {% endblock %}
 
 
@@ -33,7 +85,7 @@
                             <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$42,201.37</strong></p>
                         </div>
                     </div>
-                    <div style="margin: 0px;height: 100px;"></div>
+                    <div id="stockChartContainer" style="margin: 0px;height: 100px;"></div>
                 </div>
                 
                 <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">

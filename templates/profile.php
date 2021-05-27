@@ -11,7 +11,7 @@
 
 {% block body %}
 
-<section style="padding: 15%;font-family: Ubuntu, sans-serif;border-top: 1px inset rgba(255,255,255,0.07);">
+<section style="padding: 15%;font-family: Ubuntu, sans-serif;border-top: 1px inset rgba(255,255,255,0.07); padding-top:0px;">
     <div class="container" style="color: rgb(255,255,255);padding: 2%;background: rgba(18,18,18,0);border-radius: 15px;font-family: Ubuntu, sans-serif;">
         <div style="margin-bottom: 5%;">
             <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">my profile</h1>
