@@ -54,12 +54,12 @@
                         },
                         series: [{
                             name: '{{item["currency_code"]}} $ AUD',
-                            data: {{item['pricedata']['prices']}}
+                            data: {{item['pricedata']['prices']}}.reverse()
                         }],
                         dataLabels: {
                             enabled: false
                         },
-                        labels: {{item['pricedata']['dates']}},
+                        labels: {{item['pricedata']['dates']}}.reverse(),
                         grid: {
                             show: false
                         },
