@@ -67,7 +67,7 @@
                             labels: {
                                 show: false
                             },
-                            min: 700 
+                            min: 900 
                         },
                         yaxis: {
                             opposite: true,
