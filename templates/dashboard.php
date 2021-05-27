@@ -174,7 +174,10 @@
 			labels: {
 				show: false
 			}
-		}
+		},
+        tooltip: {
+            enabled: false
+        }
 	}
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
