@@ -188,16 +188,16 @@ def dashboard():
     if 'userid' not in session:
         return redirect(url_for('login'))
     
-    test = []
+    stock_data = {"data":[]}
     user = get_user(session['userid'])
     db_stockdata = dynamodb_resource.Table('stockData')
     
     for item in user['stocks'][0].items():
-        test.append(item)
+        stock_data['data'].append({"currency_code": item })
     
-    stock_data = {}
     
-    return render_template('dashboard.php', debug=test)
+    
+    return render_template('dashboard.php', debug=stock_data)
 # end-dashboard-route
 
 
