@@ -192,6 +192,27 @@ def dashboard():
 
 
 
+# Add stock route
+@app.route('/addstock/', methods=['POST', 'GET'])
+def addstock():
+    if 'userid' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == "POST":
+        stock_code = request.form['stock_code']
+        amount_owned = request.form['amount_owned']
+        
+        if not stock_code:
+            return render_template('dashboard.php')
+
+        if not amount_owned:
+            return render_template('dashboard.php')
+    
+    return render_template('dashboard.php')
+# end-add-stock-route
+
+
+
 # Register route
 @app.route('/register/', methods=['POST', 'GET'])
 def register():

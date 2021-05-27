@@ -45,7 +45,13 @@
                         <p style="margin-bottom: 0px;color: rgba(255,255,255,0.5);">Enter the stock information below</p>
                     </div>
                     <div style="margin: 0px;height: 100px;">
-                        <form><input class="form-control" type="text" style="width: 100%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 5px;font-size: 12px;" placeholder="Stock code"><input class="form-control" type="text" style="width: 100%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 5px;font-size: 12px;" placeholder="Amount owned"><button class="btn btn-primary" type="button" style="font-size: 12px;width: 100%;padding-top: 3px;padding-bottom: 3px;background: rgb(16,16,16);border-color: rgb(27,28,28);">Add</button></form>
+
+                        <form action="/addstock/" method="POST">
+                            <input id="stock_code" name="stock_code" class="form-control" type="text" style="width: 100%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 5px;font-size: 12px;" placeholder="Stock code">
+                            <input id="amount_owned" name="amount_owned" class="form-control" type="text" style="width: 100%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 5px;font-size: 12px;" placeholder="Amount owned">
+                            <button class="btn btn-primary" type="submit" style="font-size: 12px;width: 100%;padding-top: 3px;padding-bottom: 3px;background: rgb(16,16,16);border-color: rgb(27,28,28);">Add</button>
+                        </form>
+
                     </div>
                 </div>
                 
@@ -97,7 +103,7 @@
         },
         series: [{
             name: 'BTC $ AUD',
-            data: [123, 22, 313, 322, 311, 266, 255, 244, 277, 322, 255, 155]
+            data: [2, 11, 44, 77, 99, 130, 170, 260, 400, 510, 590, 754, 800, 1202, 1500]
         }],
         dataLabels: {
             enabled: false
