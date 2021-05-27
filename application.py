@@ -239,7 +239,7 @@ def addstock():
         
         response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
         
-        return render_template('dashboard.php', debug=response)
+        return render_template('dashboard.php', debug=response.json())
     
     return redirect(url_for('dashboard'))
 # end-add-stock-route
