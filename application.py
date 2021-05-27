@@ -1,6 +1,5 @@
 import boto3
 import uuid # str(uuid.uuid4())
-import requests
 import json
 
 from botocore.exceptions import ClientError
@@ -10,6 +9,7 @@ application = Flask(__name__)
 app = application
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name='us-east-1', aws_access_key_id="AKIAQMIDYSWEMRZJYWVT", aws_secret_access_key="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")
+apigateway_client = boto3.client('apigateway', region_name='us-east-1', aws_access_key_id="AKIAQMIDYSWEMRZJYWVT", aws_secret_access_key="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")
 
 # Functions
 def auth_login(email, password):
@@ -237,7 +237,7 @@ def addstock():
         if not amount_owned:
             return redirect(url_for('dashboard'))
         
-        response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
+        #response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
         
         return render_template('dashboard.php', debug=response)
     
