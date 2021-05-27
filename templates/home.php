@@ -16,7 +16,10 @@
         <h1 style="font-weight: normal;font-style: normal;font-family: Ubuntu, sans-serif;">Welcome to your Portfol.io</h1>
         <p style="font-family: Ubuntu, sans-serif;">Manage and track your assets with ease, using cloud storage and market APIs to track where your portfolio is headed.</p>
         <div>
-            <form class="d-xl-flex align-items-xl-center"><input class="form-control" type="text" style="width: 35%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;" placeholder="Email address"><button class="btn btn-primary" type="button" style="background: rgba(36,121,221,0.71);border-width: 0px;font-family: Ubuntu, sans-serif;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">Get Started<i class="fa fa-long-arrow-right" style="margin-left: 10px;"></i></button></form>
+            <form action="/login/" class="d-xl-flex align-items-xl-center">
+                <input class="form-control" type="text" style="width: 35%;background: rgb(16,16,16);font-family: Ubuntu, sans-serif;border-width: 1px;border-color: rgb(27,28,28);color: rgb(255,255,255);border-top-right-radius: 0px;border-bottom-right-radius: 0px;" placeholder="Email address">
+                <button class="btn btn-primary" type="button" style="background: rgba(36,121,221,0.71);border-width: 0px;font-family: Ubuntu, sans-serif;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">Get Started<i class="fa fa-long-arrow-right" style="margin-left: 10px;"></i></button>
+            </form>
         </div>
     </div>
 </section>

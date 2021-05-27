@@ -46,6 +46,20 @@ def auth_register(fullname, username, password, email, phonenumber):
             username_check = db_users.scan(
                 FilterExpression=Attr('username').eq(username)
             )
+            if username_check['Count'] != 0:
+                return {'result':False,'message':'Username already exists, Please try again.'}
+            else:
+                db_users.put_item(
+                    Item={
+                        'userid': str(uuid.uuid4()),
+                        'email': email,
+                        'fullname': fullname,
+                        'phonenumber': phonenumber,
+                        'username': username,
+                        'password': password
+                    }
+                )
+                return {'result':True,'message':'Success, Account created.'}
     else:
         return {'result':False,'message':'DB Error.'}
     
@@ -129,7 +143,8 @@ def changepassword():
 
 # Login route
 @app.route('/login/', methods=['POST', 'GET'])
-def login():
+@app.route('/login/<email>')
+def login(email=''):
     if 'userid' in session:
         return redirect(url_for('home'))
     
@@ -150,7 +165,7 @@ def login():
         else:
             return redirect(url_for('home'))
     
-    return render_template('login.php')
+    return render_template('login.php', email=email)
 # end-login-route
 
 
