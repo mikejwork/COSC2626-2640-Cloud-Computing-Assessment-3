@@ -1,6 +1,6 @@
 import boto3
 import uuid # str(uuid.uuid4())
-import json
+import requests
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr

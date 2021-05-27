@@ -19,3 +19,4 @@ urllib3==1.26.4
 virtualenv==20.4.7
 Werkzeug==2.0.1
 zipp==3.4.1
+requests
