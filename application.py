@@ -209,7 +209,8 @@ def dashboard():
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
             "pricedata": pricedata,
-            "percentage_change": get_change(float(pricedata['prices'][0]), float(pricedata['prices'][1]))
+            "percentage_change": get_change(float(pricedata['prices'][0]), float(pricedata['prices'][1])),
+            "equity": (float(item['amount_owned']) * float(item['pricedata']['prices'][0]))
         })
     
     

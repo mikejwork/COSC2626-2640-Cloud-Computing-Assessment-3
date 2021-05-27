@@ -32,7 +32,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['amount_owned'] * item['pricedata']['prices'][0] }}</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['equity'] }}</strong></p>
                         </div>
                     </div>
                     <div id="{{item['currency_code']}}" style="margin: 0px;height: 100px;"></div>
