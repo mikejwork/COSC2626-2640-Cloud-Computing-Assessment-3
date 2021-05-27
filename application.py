@@ -192,7 +192,7 @@ def dashboard():
     
     stock_data = {}
     
-    return render_template('dashboard.php', user=user)
+    return render_template('dashboard.php', debug=user['stocks'])
 # end-dashboard-route
 
 
