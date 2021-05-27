@@ -200,7 +200,7 @@ def dashboard():
         stock_data['data'].append({
             "currency_code": item['currency_code'],
             "amount_owned": item['amount_owned'],
-            "pricedata": get_pricedata(item['currency_code'])
+            "pricedata": get_pricedata(item['currency_code'])['price_data']
         })
     
     
