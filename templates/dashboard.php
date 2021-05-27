@@ -26,7 +26,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa fa-long-arrow-{% if float(item['percentage_change']) < 0.0 %}down{% else %}up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
+                            <p style="margin-bottom: 0px;color: rgba(224,48,24,0.85);"><i class="fa {% if item['percentage_change'] < 0.0 %}fa-long-arrow-down{% else %}fa-long-arrow-up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
