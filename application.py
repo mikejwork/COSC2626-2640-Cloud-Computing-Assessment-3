@@ -17,8 +17,8 @@ variables = {
 }
 
 app.secret_key = variables["secret_key"]
-dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"], aws_access_key_id=variables["aws_access_key_id"], aws_secret_access_key=variables["aws_secret_access_key"])
-apigateway_client = boto3.client('apigateway', region_name=variables["region_name"], aws_access_key_id=variables["aws_access_key_id"], aws_secret_access_key=variables["aws_secret_access_key"])
+dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"]) #, aws_access_key_id=variables["aws_access_key_id"], aws_secret_access_key=variables["aws_secret_access_key"]
+apigateway_client = boto3.client('apigateway', region_name=variables["region_name"])
 
 # Functions
 def auth_login(email, password):
