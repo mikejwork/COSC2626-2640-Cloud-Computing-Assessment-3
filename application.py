@@ -119,6 +119,20 @@ def get_change(previous, current):
         return round(float(((current - previous) * 100) / previous), 2)
     except ZeroDivisionError:
         return 0
+def user_add_stock(currency_code, amount_owned):
+    db_users = dynamodb_resource.Table('users')
+     
+    if db_users:
+        response = db_users.update_item(
+            Key={
+                'userid': session['userid']
+            },
+            UpdateExpression="SET stocks = list_append(stocks, :item)",
+            ExpressionAttributeValues={
+                ':item': {"amount_owned":amount_owned, "currency_code": currency_code}
+            },
+            ReturnValues="UPDATED_NEW"
+        )
 # end-functions
 
 
@@ -239,7 +253,10 @@ def addstock():
         
         response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
         
-        return render_template('dashboard.php', debug=response.json())
+        if response.json()['message'] == 'Currency code not found.':
+            return redirect(url_for('dashboard'))
+        
+        user_add_stock(stock_code, amount_owned)
     
     return redirect(url_for('dashboard'))
 # end-add-stock-route
