@@ -1,5 +1,5 @@
 import boto3
-import uuid # str(uuid.uuid4())
+import uuid
 import requests
 
 from botocore.exceptions import ClientError

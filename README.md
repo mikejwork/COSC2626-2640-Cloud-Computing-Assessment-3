@@ -18,3 +18,6 @@ I will be hosting the site on AWS Elastic beanstalk which will automatically han
 The site will be hosted on an EC2 Instance with Python Flask, using external market APIs, Javascript graph libraries, and more utilities from AWS
 
 AWS CodePipeline is being utilised, which allows me to link my Elastic Beanstalk project to a github repository, and will automatically update the instance whenever a build is pushed to the main branch, extremely useful and saves me a considerable amount of time.
+
+## Showcase
+![dashboard](/showcase/dashboard.png)
