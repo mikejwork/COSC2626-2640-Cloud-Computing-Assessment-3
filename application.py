@@ -129,7 +129,7 @@ def user_add_stock(currency_code, amount_owned):
             },
             UpdateExpression="SET stocks = list_append(stocks, :item)",
             ExpressionAttributeValues={
-                ':item': {"amount_owned":amount_owned, "currency_code": currency_code}
+                ':item': {"M": [{"amount_owned":amount_owned, "currency_code": currency_code}]}
             },
             ReturnValues="UPDATED_NEW"
         )
