@@ -127,7 +127,7 @@ def user_add_stock(currency_code, amount_owned):
             Key={
                 'userid': session['userid']
             },
-            UpdateExpression="ADD stocks = list_append(stocks, :item)",
+            UpdateExpression="SET #stocks = list_append(#stocks, :item)",
             ExpressionAttributeValues={
                 ':item': {"M": [{"amount_owned":amount_owned, "currency_code": currency_code}]}
             },
