@@ -153,7 +153,7 @@ def user_add_stock(currency_code, amount_owned):
             "amount_owned": amount_owned
         }
         firehose_client.put_record(
-            DeliveryStreamName='portfolioDeliveryStream',
+            DeliveryStreamName='portfolioStream',
             Record={
                 "Data": json.dumps(firehose_data)
             }
@@ -195,7 +195,7 @@ def add_mock_data():
             "amount_owned": item["amount_owned"]
         }
         firehose_client.put_record(
-            DeliveryStreamName='portfolioDeliveryStream',
+            DeliveryStreamName='portfolioStream',
             Record={
                 "Data": json.dumps(firehose_data)
             }
