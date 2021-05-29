@@ -143,12 +143,13 @@ def user_add_stock(currency_code, amount_owned):
             },
             ReturnValues="UPDATED_NEW"
         )
+        # Adding logs to firehose for later analysis
         firehose_data = {
             "type": "stock_added",
             "currency_code": currency_code,
             "amount_owned": amount_owned
         }
-        firehose_response = firehose_client.put_record(
+        firehose_client.put_record(
             DeliveryStreamName='portfolioDeliveryStream',
             Record={
                 "Data": json.dumps(firehose_data)
@@ -239,6 +240,8 @@ def dashboard():
         return redirect(url_for('login'))
     
     stock_data = {"data":[]}
+    position_total = 0
+    
     user = get_user(session['userid'])
     
     for item in user['stocks']:
@@ -250,8 +253,11 @@ def dashboard():
             "percentage_change": get_change(float(pricedata['prices'][1]), float(pricedata['prices'][0])),
             "equity": round(float(item['amount_owned']) * float(pricedata['prices'][0]), 2)
         })
+        
+    for data in stock_data['data']:
+        position_total = position_total + data["equity"]
     
-    return render_template('dashboard.php', stock_data=stock_data['data'])
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2))
 # end-dashboard-route
 
 
