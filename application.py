@@ -1,6 +1,7 @@
 import boto3
 import uuid
 import requests
+import json
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -142,13 +143,15 @@ def user_add_stock(currency_code, amount_owned):
             },
             ReturnValues="UPDATED_NEW"
         )
-        
+        firehose_data = {
+            "type": "stock_added",
+            "currency_code": currency_code,
+            "amount_owned": amount_owned
+        }
         firehose_response = firehose_client.put_record(
             DeliveryStreamName='portfolioDeliveryStream',
             Record={
-                "type": "stock_added",
-                "currency_code": currency_code,
-                "amount_owned": amount_owned
+                "Data": json.dumps(firehose_data)
             }
         )
 # end-functions
