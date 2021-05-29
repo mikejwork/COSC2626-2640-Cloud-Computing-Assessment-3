@@ -3,6 +3,9 @@ import uuid
 import requests
 import json
 
+import random
+from random import uniform
+
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
 from flask import Flask, render_template, request, redirect, url_for, session
@@ -148,6 +151,48 @@ def user_add_stock(currency_code, amount_owned):
             "type": "stock_added",
             "currency_code": currency_code,
             "amount_owned": amount_owned
+        }
+        firehose_client.put_record(
+            DeliveryStreamName='portfolioDeliveryStream',
+            Record={
+                "Data": json.dumps(firehose_data)
+            }
+        )
+        add_mock_data()
+def add_mock_data():
+    mockdata_list = [
+        { 
+            "currency_code": "BTC",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        },
+        { 
+            "currency_code": "BTC",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        },
+        { 
+            "currency_code": "ADA",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        },
+        { 
+            "currency_code": "XRP",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        },
+        { 
+            "currency_code": "BNB",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        },
+        { 
+            "currency_code": "ETH",
+            "amount_owned": round(random.uniform(0.000, 66.66), 2)
+        }
+    ]
+    
+    for item in mockdata_list:
+        # Adding logs to firehose for later analysis
+        firehose_data = {
+            "type": "stock_added",
+            "currency_code": item["currency_code"],
+            "amount_owned": item["amount_owned"]
         }
         firehose_client.put_record(
             DeliveryStreamName='portfolioDeliveryStream',
