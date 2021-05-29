@@ -10,15 +10,15 @@ app = application
 
 # Change these according to your details
 variables = {
-    "secret_key": "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6",
     "region_name": "us-east-1",
     "aws_access_key_id": "AKIAQMIDYSWEMRZJYWVT",
-    "aws_secret_access_key": "IvLXb/dIYL3Bg7p7Z4DCx4HkiodeLWfqhnpC3GpN"
+    "aws_secret_access_key": "IvLXb/dIYL3Bg7p7Z4DCx4HkiodeLWfqhnpC3GpN",
+    "api_link": "https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData"
 }
 
-app.secret_key = variables["secret_key"]
-dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"]) #, aws_access_key_id=variables["aws_access_key_id"], aws_secret_access_key=variables["aws_secret_access_key"]
-apigateway_client = boto3.client('apigateway', region_name=variables["region_name"])
+app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
+dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"])
+firehose_client = boto3.client('firehose', region_name=variables["region_name"])
 
 # Functions
 def auth_login(email, password):
@@ -142,6 +142,15 @@ def user_add_stock(currency_code, amount_owned):
             },
             ReturnValues="UPDATED_NEW"
         )
+        
+        firehose_response = firehose_client.put_record(
+            DeliveryStreamName='portfolioDeliveryStream',
+            Record={
+                "type": "stock_added",
+                "currency_code": currency_code,
+                "amount_owned": amount_owned
+            }
+        )
 # end-functions
 
 
@@ -260,7 +269,7 @@ def addstock():
         if not amount_owned:
             return redirect(url_for('dashboard'))
         
-        response = requests.get('https://7ugesarq11.execute-api.us-east-1.amazonaws.com/default/processStockData?currency_code=' + stock_code)
+        response = requests.get(variables["api_link"] + '?currency_code=' + stock_code)
         
         if response.json()['message'] == 'Currency code not found.':
             return redirect(url_for('dashboard'))
