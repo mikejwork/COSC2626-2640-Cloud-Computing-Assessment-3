@@ -191,7 +191,7 @@ def add_mock_data():
             Item={
                 'data_type': "stock_bought",
                 'currency_code': item["currency_code"],
-                'amount': item["amount_owned"]
+                'amount': str(item["amount_owned"])
             }
         )
 # end-functions
