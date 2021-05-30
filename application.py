@@ -153,10 +153,9 @@ def user_add_stock(currency_code, amount_owned):
             "amount_owned": amount_owned
         }
         kinesis_client.put_record(
-            DeliveryStreamName='portfolioStream',
-            Record={
-                "Data": json.dumps(kinesis_data)
-            }
+            StreamName = 'portfolioStream',
+            PartitionKey = 'stockRecords',
+            Data = json.dumps(kinesis_data)
         )
         add_mock_data()
 def add_mock_data():
@@ -195,10 +194,9 @@ def add_mock_data():
             "amount_owned": item["amount_owned"]
         }
         kinesis_client.put_record(
-            DeliveryStreamName='portfolioStream',
-            Record={
-                "Data": json.dumps(kinesis_data)
-            }
+            StreamName = 'portfolioStream',
+            PartitionKey = 'stockRecords',
+            Data = json.dumps(kinesis_data)
         )
 # end-functions
 
