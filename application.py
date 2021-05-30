@@ -136,9 +136,10 @@ def get_change(previous, current):
         return 0
 def user_add_stock(currency_code, amount_owned):
     db_users = dynamodb_resource.Table('users')
+    db_userActivityData = dynamodb_resource.Table('userActivityData')
      
     if db_users:
-        response = db_users.update_item(
+        db_users.update_item(
             Key={
                 'userid': session['userid']
             },
@@ -148,19 +149,17 @@ def user_add_stock(currency_code, amount_owned):
             },
             ReturnValues="UPDATED_NEW"
         )
-        # Adding logs to kinesis for later analysis
-        kinesis_data = {
-            'TYPE': "stock_added",
-            'CURRENCY_CODE': currency_code,
-            'AMOUNT_OWNED': amount_owned
-        }
-        kinesis_client.put_record(
-            StreamName = 'portfolioStream',
-            PartitionKey = '1',
-            Data = json.dumps(kinesis_data)
+        
+        db_userActivityData.put_item(
+            Item={
+                'data_type': "stock_bought",
+                'currency_code': currency_code,
+                'amount_owned': amount_owned
+            }
         )
         add_mock_data()
 def add_mock_data():
+    db_userActivityData = dynamodb_resource.Table('userActivityData')
     mockdata_list = [
         { 
             "currency_code": "BTC",
@@ -189,16 +188,12 @@ def add_mock_data():
     ]
     
     for item in mockdata_list:
-        # Adding logs to kinesis for later analysis
-        kinesis_data = {
-            "type": "stock_added",
-            "currency_code": item["currency_code"],
-            "amount_owned": item["amount_owned"]
-        }
-        kinesis_client.put_record(
-            StreamName = 'portfolioStream',
-            PartitionKey = '1',
-            Data = json.dumps(kinesis_data)
+        db_userActivityData.put_item(
+            Item={
+                'data_type': "stock_bought",
+                'currency_code': item["currency_code"],
+                'amount_owned': item["amount_owned"]
+            }
         )
 # end-functions
 
