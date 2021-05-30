@@ -22,7 +22,7 @@ variables = {
 
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"])
-firehose_client = boto3.client('firehose', region_name=variables["region_name"])
+kinesis_client = boto3.client('kinesis', region_name=variables["region_name"])
 
 # Functions
 def auth_login(email, password):
@@ -146,16 +146,16 @@ def user_add_stock(currency_code, amount_owned):
             },
             ReturnValues="UPDATED_NEW"
         )
-        # Adding logs to firehose for later analysis
-        firehose_data = {
+        # Adding logs to kinesis for later analysis
+        kinesis_data = {
             "type": "stock_added",
             "currency_code": currency_code,
             "amount_owned": amount_owned
         }
-        firehose_client.put_record(
+        kinesis_client.put_record(
             DeliveryStreamName='portfolioStream',
             Record={
-                "Data": json.dumps(firehose_data)
+                "Data": json.dumps(kinesis_data)
             }
         )
         add_mock_data()
@@ -188,16 +188,16 @@ def add_mock_data():
     ]
     
     for item in mockdata_list:
-        # Adding logs to firehose for later analysis
-        firehose_data = {
+        # Adding logs to kinesis for later analysis
+        kinesis_data = {
             "type": "stock_added",
             "currency_code": item["currency_code"],
             "amount_owned": item["amount_owned"]
         }
-        firehose_client.put_record(
+        kinesis_client.put_record(
             DeliveryStreamName='portfolioStream',
             Record={
-                "Data": json.dumps(firehose_data)
+                "Data": json.dumps(kinesis_data)
             }
         )
 # end-functions
