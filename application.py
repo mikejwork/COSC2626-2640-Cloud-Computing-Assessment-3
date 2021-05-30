@@ -22,6 +22,7 @@ variables = {
 
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"])
+dynamodb_client = boto3.client('dynamodb', region_name=variables["region_name"])
 kinesis_client = boto3.client('kinesis', region_name=variables["region_name"])
 
 # Functions
@@ -148,9 +149,9 @@ def user_add_stock(currency_code, amount_owned):
         )
         # Adding logs to kinesis for later analysis
         kinesis_data = {
-            "type": "stock_added",
-            "currency_code": currency_code,
-            "amount_owned": amount_owned
+            'TYPE': "stock_added",
+            'CURRENCY_CODE': currency_code,
+            'AMOUNT_OWNED': amount_owned
         }
         kinesis_client.put_record(
             StreamName = 'portfolioStream',
@@ -370,3 +371,73 @@ def register():
     
     return render_template('register.php')
 # end-register-route
+
+
+
+def setup_application():
+    existing_tables = dynamodb_client.list_tables()['TableNames']
+    
+    if 'users' not in existing_tables:
+        dynamodb_resource.create_table(
+            TableName='users',
+            KeySchema=[
+                {
+                    'AttributeName': 'userid',
+                    'KeyType': 'HASH'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'userid',
+                    'AttributeType': 'S'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10
+            }
+        )
+    if 'stockData' not in existing_tables:
+        dynamodb_resource.create_table(
+            TableName='stockData',
+            KeySchema=[
+                {
+                    'AttributeName': 'currency_code',
+                    'KeyType': 'HASH'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'currency_code',
+                    'AttributeType': 'S'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10
+            }
+        )
+    if 'userActivityData' not in existing_tables:
+        dynamodb_resource.create_table(
+            TableName='userActivityData',
+            KeySchema=[
+                {
+                    'AttributeName': 'data_type',
+                    'KeyType': 'HASH'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'data_type',
+                    'AttributeType': 'S'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10
+            }
+        )
+
+setup_application()   
+    
+        
