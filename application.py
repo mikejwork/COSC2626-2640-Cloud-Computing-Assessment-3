@@ -149,7 +149,7 @@ def user_add_stock(currency_code, amount_owned):
             ReturnValues="UPDATED_NEW"
         )
         
-        db_userActivityData.put_item(
+        response = db_userActivityData.put_item(
             Item={
                 'data_type': "stock_bought",
                 'currency_code': currency_code,
@@ -187,7 +187,7 @@ def add_mock_data():
     ]
     
     for item in mockdata_list:
-        db_userActivityData.put_item(
+        response = db_userActivityData.put_item(
             Item={
                 'data_type': "stock_bought",
                 'currency_code': item["currency_code"],
