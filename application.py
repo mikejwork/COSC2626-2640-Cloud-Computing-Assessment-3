@@ -71,6 +71,7 @@ def auth_register(fullname, username, password, email, phonenumber):
                         'email': email,
                         'fullname': fullname,
                         'phonenumber': phonenumber,
+                        'stocks': [],
                         'username': username,
                         'password': password
                     }
