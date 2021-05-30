@@ -153,7 +153,7 @@ def user_add_stock(currency_code, amount_owned):
             Item={
                 'data_type': "stock_bought",
                 'currency_code': currency_code,
-                'amount_owned': amount_owned
+                'amount': amount_owned
             }
         )
         add_mock_data()
@@ -191,7 +191,7 @@ def add_mock_data():
             Item={
                 'data_type': "stock_bought",
                 'currency_code': item["currency_code"],
-                'amount_owned': item["amount_owned"]
+                'amount': item["amount_owned"]
             }
         )
 # end-functions
