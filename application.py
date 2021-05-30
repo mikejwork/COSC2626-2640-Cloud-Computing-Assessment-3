@@ -23,7 +23,6 @@ variables = {
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"])
 dynamodb_client = boto3.client('dynamodb', region_name=variables["region_name"])
-kinesis_client = boto3.client('kinesis', region_name=variables["region_name"])
 
 # Functions
 def auth_login(email, password):
