@@ -151,6 +151,7 @@ def user_add_stock(currency_code, amount_owned):
         
         response = db_userActivityData.put_item(
             Item={
+                'dataid': str(uuid.uuid4()),
                 'data_type': "stock_bought",
                 'currency_code': currency_code,
                 'amount': amount_owned
@@ -189,6 +190,7 @@ def add_mock_data():
     for item in mockdata_list:
         response = db_userActivityData.put_item(
             Item={
+                'dataid': str(uuid.uuid4()),
                 'data_type': "stock_bought",
                 'currency_code': item["currency_code"],
                 'amount': str(item["amount_owned"])
