@@ -14,7 +14,7 @@
         <div class="container" style="color: rgb(255,255,255);padding: 2%;background: rgba(18,18,18,0);border-radius: 15px;font-family: Roboto, sans-serif;padding-bottom: 0px;padding-left: 10%;padding-right: 10%;">
             <div style="margin-bottom: 5%; font-family: Ubuntu, sans-serif;">
                 <h1 style="font-weight: normal;font-style: normal;margin-bottom: 5px;">My Dashboard</h1>
-                <strong style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</strong>
+                <p style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</p>
                 <p style="color: rgba(255,255,255,1);">Your Net Position: <strong>{{"${:,.2f}".format(position_total)}}</strong></p>
             </div>
         </div>
@@ -28,6 +28,9 @@
                         <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: {% if item['percentage_change'] < 0.0 %}rgba(224,48,24,0.85);{% else %}rgba(40,224,24,0.85);{% endif %}"><i class="fa {% if item['percentage_change'] < 0.0 %}fa-long-arrow-down{% else %}fa-long-arrow-up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
+                        </div>
+                        <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-left: 5px;padding-right: 5px;margin-left: 5px;">
+                            <a href="/closeposition/{{item['currency_code']}}"><i class="fa fa-close" style="width: auto;color: rgb(253,13,13);"></i></a>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">

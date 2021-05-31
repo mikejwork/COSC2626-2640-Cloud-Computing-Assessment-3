@@ -297,6 +297,38 @@ def addstock():
 
 
 
+# Close position route
+@app.route('/closeposition/<currency_code>', methods=['POST', 'GET'])
+def closeposition(currency_code):
+    if 'userid' not in session:
+        return redirect(url_for('login'))
+    
+    if user_owns_stock(currency_code):
+        user = get_user(session['userid'])
+        db_users = dynamodb_resource.Table('users')
+
+        new_stocks = []
+
+        for stock in user['stocks']:
+            if stock['currency_code'] != currency_code:
+                new_stocks.append(stock)
+
+        response = db_users.update_item(
+            Key={
+                'userid': session['userid']
+            },
+            UpdateExpression="set stocks=:stocks",
+            ExpressionAttributeValues={
+                ':stocks': new_stocks
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+    
+    return redirect(url_for('dashboard'))
+# end-close-position-route
+
+
+
 # Register route
 @app.route('/register/', methods=['POST', 'GET'])
 def register():
