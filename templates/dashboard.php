@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["highest_moved"]["amount"] }} {{ user_analytics["highest_moved"]["currency_code"] }}</p>
+                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["highest_moved"]["amount"] }} Transactions</p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>${{ user_analytics["highest_moved"]["current_price"] }}</strong></p>
                         </div>
@@ -151,7 +151,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["most_purchased"]["amount"] }} {{ user_analytics["most_purchased"]["currency_code"] }}</p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>${{ user_analytics["most_purchased"]["total"] }}</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>${{ user_analytics["most_purchased"]["total_price"] }}</strong></p>
                         </div>
                     </div>
                 </div>
