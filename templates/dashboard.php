@@ -15,7 +15,7 @@
             <div style="margin-bottom: 5%; font-family: Ubuntu, sans-serif;">
                 <h1 style="font-weight: normal;font-style: normal;margin-bottom: 5px;">My Dashboard</h1>
                 <strong style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</strong>
-                <p style="color: rgba(255,255,255,1);">Your Net Position: <strong>${{position_total}}</strong></p>
+                <p style="color: rgba(255,255,255,1);">Your Net Position: <strong>${{ locale.format("%d", position_total, grouping=True) }}</strong></p>
             </div>
         </div>
         <div class="container">

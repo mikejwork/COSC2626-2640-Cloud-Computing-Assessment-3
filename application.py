@@ -3,6 +3,7 @@ import uuid
 import requests
 import json
 import random
+import locale
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -188,7 +189,7 @@ def add_mock_data():
                 'dataid': str(uuid.uuid4()),
                 'data_type': "stock_bought",
                 'currency_code': random.choice(mock_names),
-                'amount': str(round(random.uniform(0.00, 100.00), 4))
+                'amount': str(round(random.uniform(0.00, 20.00), 4))
             }
         )
 # end-functions
@@ -379,16 +380,6 @@ def register():
 
 def setup_application():
     existing_tables = dynamodb_client.list_tables()['TableNames']
-    
-    db_userActivityData = dynamodb_resource.Table('userActivityData')
-    db_userActivityData.put_item(
-            Item={
-                'dataid': str(uuid.uuid4()),
-                'data_type': "stock_bought",
-                'currency_code': 'BTC',
-                'amount': str(round(random.uniform(0.00, 100.00), 4))
-            }
-        )
     
     if 'users' not in existing_tables:
         dynamodb_resource.create_table(
