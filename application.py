@@ -292,7 +292,7 @@ def dashboard():
         LogType='Tail'
     )
     
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=json.loads(response))
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=response)
 # end-dashboard-route
 
 
