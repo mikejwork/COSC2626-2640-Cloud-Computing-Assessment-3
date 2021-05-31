@@ -3,9 +3,6 @@ import uuid
 import requests
 import json
 
-import sched, time
-import threading
-
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
 from flask import Flask, render_template, request, redirect, url_for, session
@@ -39,9 +36,6 @@ def fetch_user_analytics():
 
     return json.loads(response['Payload'].read().decode())
 _user_analytics = fetch_user_analytics()
-
-x = threading.Thread(target=timer_function)
-x.start()
 
 
 # Functions
@@ -270,9 +264,9 @@ def dashboard():
         })
         
     for data in stock_data['data']:
-        position_total = position_total + data["equity"]
+        position_total = round(position_total + data["equity"], 2)
     
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), user_analytics=_user_analytics)
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=position_total, user_analytics=_user_analytics)
 # end-dashboard-route
 
 
