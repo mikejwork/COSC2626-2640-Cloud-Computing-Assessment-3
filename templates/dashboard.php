@@ -30,7 +30,7 @@
                             <p style="margin-bottom: 0px;color: {% if item['percentage_change'] < 0.0 %}rgba(224,48,24,0.85);{% else %}rgba(40,224,24,0.85);{% endif %}"><i class="fa {% if item['percentage_change'] < 0.0 %}fa-long-arrow-down{% else %}fa-long-arrow-up{% endif %}" style="margin-right: 5px;"></i>{{ item['percentage_change'] }}%</p>
                         </div>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-left: 5px;padding-right: 5px;margin-left: 5px;">
-                            <a href="/closeposition/{{item['currency_code']}}"><i class="fa fa-close" style="width: auto;color: rgb(55,55,55);"></i></a>
+                            <a href="/closeposition/{{item['currency_code']}}"><i class="fa fa-close" style="width: auto;color: rgb(35,35,35);"></i></a>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
@@ -128,36 +128,39 @@
         <div class="container">
             <div class="row g-0 d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
                 
-                <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
-                    <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;"> {{user_analytics["highest_moved"]["currency_code"]}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
-                        <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>Highest mover</p>
+                {% if user_analytics["highest_moved"] %}
+                    <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
+                        <div style="display: flex;margin-bottom: 5px;">
+                            <p style="margin-bottom: 0px;"> {{user_analytics["highest_moved"]["currency_code"]}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
+                            <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
+                                <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>Highest mover</p>
+                            </div>
+                        </div>
+                        <div style="display: flex;margin-bottom: 5px;">
+                            <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["highest_moved"]["amount"] }} Transaction(s)</p>
+                            <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
+                                <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["highest_moved"]["current_price"])}}</strong></p>
+                            </div>
                         </div>
                     </div>
-                    <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["highest_moved"]["amount"] }} Transaction(s)</p>
-                        <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["highest_moved"]["current_price"])}}</strong></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
-                    <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;">{{user_analytics["most_purchased"]["currency_code"]}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
-                        <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>Most purchased</p>
-                        </div>
-                    </div>
-                    <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["most_purchased"]["amount"] }} {{ user_analytics["most_purchased"]["currency_code"] }}</p>
-                        <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["most_purchased"]["total_price"])}}</strong></p>
-                        </div>
-                    </div>
-                </div>
+                {% endif %}
                 
+                {% if user_analytics["most_purchased"] %}
+                    <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
+                        <div style="display: flex;margin-bottom: 5px;">
+                            <p style="margin-bottom: 0px;">{{user_analytics["most_purchased"]["currency_code"]}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
+                            <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
+                                <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>Most purchased</p>
+                            </div>
+                        </div>
+                        <div style="display: flex;margin-bottom: 5px;">
+                            <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["most_purchased"]["amount"] }} {{ user_analytics["most_purchased"]["currency_code"] }}</p>
+                            <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
+                                <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["most_purchased"]["total_price"])}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>
