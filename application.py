@@ -159,7 +159,6 @@ def user_add_stock(currency_code, amount_owned):
                 'amount': amount_owned
             }
         )
-        add_mock_data()
 def user_owns_stock(currency_code):
     user = get_user(session['userid'])
     for stock in user['stocks']:
