@@ -2,9 +2,7 @@ import boto3
 import uuid
 import requests
 import json
-
 import random
-from random import uniform
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -154,6 +152,9 @@ def user_owns_stock(currency_code):
     return False  
 def add_mock_data():
     db_userActivityData = dynamodb_resource.Table('userActivityData')
+    
+    mock_names = ['BTC', 'ADA', 'XRP', 'BNB', 'ETH']
+    
     mockdata_list = [
         { 
             "currency_code": "BTC",
@@ -181,13 +182,13 @@ def add_mock_data():
         }
     ]
     
-    for item in mockdata_list:
-        response = db_userActivityData.put_item(
+    for i in 50:
+        db_userActivityData.put_item(
             Item={
                 'dataid': str(uuid.uuid4()),
                 'data_type': "stock_bought",
-                'currency_code': item["currency_code"],
-                'amount': str(item["amount_owned"])
+                'currency_code': random.choice(mock_names),
+                'amount': str(round(random.uniform(0.00, 100.00), 4))
             }
         )
 # end-functions
