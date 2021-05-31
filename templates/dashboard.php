@@ -16,7 +16,7 @@
                 <h1 style="font-weight: normal;font-style: normal;margin-bottom: 5px;">My Dashboard</h1>
                 <strong style="color: rgba(255,255,255,1);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</strong>
                 <p style="color: rgba(255,255,255,0.5);">Your Net Position: ${{position_total}}</p>
-                <p style="color: rgba(255,255,255,0.5);">Debug: {{debug}}</p>
+                <p style="color: rgba(255,255,255,0.5);">{{user_analytics}}</p>
             </div>
         </div>
         <div class="container">
@@ -128,13 +128,13 @@
                 
                 <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;">BTC $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
+                        <p style="margin-bottom: 0px;">{{user_analytics["highest_moved"]["currency_code"]}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
                         <div style="width: auto;background: #0e0e0e;display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>24hr Highest mover</p>
+                            <p style="margin-bottom: 0px;color: rgba(40,224,24,0.85);"><i class="fa fa-long-arrow-up" style="margin-right: 5px;"></i>Highest mover</p>
                         </div>
                     </div>
                     <div style="display: flex;margin-bottom: 5px;">
-                        <p style="margin-bottom: 0px;color: rgba(48,105,217,0.85);"><br></p>
+                        <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><br>{{ user_analytics["highest_moved"]["amount"] }} {{ user_analytics["highest_moved"]["currency_code"] }}</p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
                             <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$48,238.80</strong></p>
                         </div>

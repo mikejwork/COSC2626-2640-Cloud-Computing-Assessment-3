@@ -286,7 +286,7 @@ def dashboard():
     for data in stock_data['data']:
         position_total = position_total + data["equity"]
     
-    lambda_dict = {'user': 'hans_peter'}
+    lambda_dict = {'test': 'test'}
     response = lambda_client.invoke(
         FunctionName='processUserAnalytics',
         InvocationType='RequestResponse',
@@ -294,7 +294,7 @@ def dashboard():
         Payload=json.dumps(lambda_dict).encode('utf-8')
     )
     
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=json.loads(response['Payload'].read().decode()))
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), user_analytics=json.loads(response['Payload'].read().decode()))
 # end-dashboard-route
 
 
