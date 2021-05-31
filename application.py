@@ -323,12 +323,12 @@ def addstock():
         if not amount_owned:
             return redirect(url_for('dashboard'))
         
-        if user_owns_stock(stock_code):
-            return redirect(url_for('dashboard'))
-        
         response = requests.get(variables["api_link"] + '?currency_code=' + stock_code)
         
         if response.json()['message'] == 'Currency code not found.':
+            return redirect(url_for('dashboard'))
+
+        if user_owns_stock(stock_code):
             return redirect(url_for('dashboard'))
         
         user_add_stock(stock_code, amount_owned)
