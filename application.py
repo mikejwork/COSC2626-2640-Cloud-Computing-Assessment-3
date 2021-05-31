@@ -287,10 +287,12 @@ def dashboard():
         position_total = position_total + data["equity"]
     
     response = lambda_client.invoke(
-        FunctionName='processUserAnalytics'
+        FunctionName='processUserAnalytics',
+        InvocationType='RequestResponse',
+        LogType='Tail'
     )
     
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=response)
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=json.loads(response))
 # end-dashboard-route
 
 
