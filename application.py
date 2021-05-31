@@ -146,6 +146,12 @@ def user_add_stock(currency_code, amount_owned):
             }
         )
         add_mock_data()
+def user_owns_stock(currency_code):
+    user = get_user(session['userid'])
+    for stock in user['stocks']:
+        if stock['currency_code'] == currency_code:
+            return True
+    return False  
 def add_mock_data():
     db_userActivityData = dynamodb_resource.Table('userActivityData')
     mockdata_list = [
@@ -313,6 +319,9 @@ def addstock():
             return redirect(url_for('dashboard'))
 
         if not amount_owned:
+            return redirect(url_for('dashboard'))
+        
+        if user_owns_stock(stock_code):
             return redirect(url_for('dashboard'))
         
         response = requests.get(variables["api_link"] + '?currency_code=' + stock_code)
