@@ -3,7 +3,7 @@ import uuid
 import requests
 import json
 
-from datetime import datetime, timedelta
+import sched, time
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -39,13 +39,15 @@ def fetch_user_analytics():
     return json.loads(response['Payload'].read().decode())
 _user_analytics = fetch_user_analytics()
 
-def start_timers():
-    end_time = datetime.now() + timedelta(seconds=5)
-    while datetime.now() < end_time:
-        global _user_analytics
-        _user_analytics = fetch_user_analytics()
+s = sched.scheduler(time.time, time.sleep)
+def do_something(sc): 
+    global _user_analytics
+    _user_analytics = fetch_user_analytics()
 
-start_timers()
+    s.enter(60, 1, do_something, (sc,))
+
+s.enter(60, 1, do_something, (s,))
+s.run()
 
 # Functions
 def auth_login(email, password):
