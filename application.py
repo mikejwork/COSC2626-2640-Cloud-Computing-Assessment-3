@@ -150,48 +150,7 @@ def user_owns_stock(currency_code):
     for stock in user['stocks']:
         if stock['currency_code'] == currency_code:
             return True
-    return False  
-def add_mock_data():
-    db_userActivityData = dynamodb_resource.Table('userActivityData')
-    
-    mock_names = ['BTC', 'ADA', 'XRP', 'BNB', 'ETH']
-    
-    mockdata_list = [
-        { 
-            "currency_code": "BTC",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        },
-        { 
-            "currency_code": "BTC",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        },
-        { 
-            "currency_code": "ADA",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        },
-        { 
-            "currency_code": "XRP",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        },
-        { 
-            "currency_code": "BNB",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        },
-        { 
-            "currency_code": "ETH",
-            "amount_owned": round(random.uniform(0.000, 66.66), 2)
-        }
-    ]
-    
-    for x in range(50):
-        db_userActivityData.put_item(
-            Item={
-                'dataid': str(uuid.uuid4()),
-                'data_type': "stock_bought",
-                'currency_code': random.choice(mock_names),
-                'amount': str(round(random.uniform(0.00, 20.00), 4))
-            }
-        )
+    return False
 # end-functions
 
 
