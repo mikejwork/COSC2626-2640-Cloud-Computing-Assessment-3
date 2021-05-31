@@ -27,7 +27,6 @@ lambda_client = boto3.client('lambda', region_name=variables["region_name"])
 # Local data
 # Not needed to be updated every single time a user refreshes the page, but stored for faster load times
 # Can be recognized with an underscore prefix
-_user_analytics = {}
 def fetch_user_analytics():
     lambda_dict = {'test': 'test'}
     response = lambda_client.invoke(
@@ -38,7 +37,7 @@ def fetch_user_analytics():
     )
 
     return json.loads(response['Payload'].read().decode())
-
+_user_analytics = fetch_user_analytics()
 
 # Functions
 def auth_login(email, password):
@@ -379,8 +378,6 @@ def register():
 
 def setup_application():
     existing_tables = dynamodb_client.list_tables()['TableNames']
-    
-    _user_analytics = fetch_user_analytics()
     
     if 'users' not in existing_tables:
         dynamodb_resource.create_table(
