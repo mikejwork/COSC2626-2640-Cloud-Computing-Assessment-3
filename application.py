@@ -2,8 +2,8 @@ import boto3
 import uuid
 import requests
 import json
-import random
-import locale
+
+from datetime import datetime, timedelta
 
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
@@ -37,7 +37,15 @@ def fetch_user_analytics():
     )
 
     return json.loads(response['Payload'].read().decode())
+global _user_analytics
 _user_analytics = fetch_user_analytics()
+
+def start_timers():
+    end_time = datetime.now() + timedelta(seconds=5)
+    while datetime.now() < end_time:
+        _user_analytics = fetch_user_analytics()
+
+start_timers()
 
 # Functions
 def auth_login(email, password):
