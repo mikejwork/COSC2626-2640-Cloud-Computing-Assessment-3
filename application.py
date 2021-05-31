@@ -23,6 +23,7 @@ variables = {
 app.secret_key = "iqFfhY9FCUOJ8Z46DQLDe93mEMBln4W6"
 dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_name"])
 dynamodb_client = boto3.client('dynamodb', region_name=variables["region_name"])
+lambda_client = boto3.client('lambda', region_name=variables["region_name"])
 
 # Functions
 def auth_login(email, password):
@@ -76,19 +77,6 @@ def auth_register(fullname, username, password, email, phonenumber):
                     }
                 )
                 return {'result':True,'message':'Success, Account created.'}
-    else:
-        return {'result':False,'message':'DB Error.'}
-    
-    
-    
-    
-    
-    if db_users:
-        response = db_users.scan(
-            FilterExpression=Attr('username').equals(username) & Attr('email_address').contains(email)
-        )
-        
-        print(response['Items'])
     else:
         return {'result':False,'message':'DB Error.'}
 def auth_changepassword(userid, new_password):
@@ -298,7 +286,11 @@ def dashboard():
     for data in stock_data['data']:
         position_total = position_total + data["equity"]
     
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2))
+    response = lambda_client.invoke(
+        FunctionName='processUserAnalytics'
+    )
+    
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), debug=response)
 # end-dashboard-route
 
 

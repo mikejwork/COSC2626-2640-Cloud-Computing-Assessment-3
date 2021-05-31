@@ -16,6 +16,7 @@
                 <h1 style="font-weight: normal;font-style: normal;margin-bottom: 5px;">My Dashboard</h1>
                 <p style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</p>
                 <p style="color: rgba(255,255,255,0.5);">Your Net Position: ${{position_total}}</p>
+                <p style="color: rgba(255,255,255,0.5);">Debug: {{debug}}</p>
             </div>
         </div>
         <div class="container">
