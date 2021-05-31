@@ -183,7 +183,7 @@ def add_mock_data():
         }
     ]
     
-    for i in 50:
+    for x in range(50):
         db_userActivityData.put_item(
             Item={
                 'dataid': str(uuid.uuid4()),
