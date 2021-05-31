@@ -15,7 +15,7 @@
             <div style="margin-bottom: 5%; font-family: Ubuntu, sans-serif;">
                 <h1 style="font-weight: normal;font-style: normal;margin-bottom: 5px;">My Dashboard</h1>
                 <strong style="color: rgba(255,255,255,0.5);">View your positions and current portfolio balance below. You can also view the most popular stocks being purchased by our userbase.</strong>
-                <p style="color: rgba(255,255,255,1);">Your Net Position: <strong>${{"${:,.2f}".format(position_total)}}</strong></p>
+                <p style="color: rgba(255,255,255,1);">Your Net Position: <strong>{{"${:,.2f}".format(position_total)}}</strong></p>
             </div>
         </div>
         <div class="container">
@@ -33,7 +33,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);"><strong>{{item['amount_owned']}} {{item['currency_code']}}</strong></p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ item['equity'] }} AUD</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>$ {{ "${:,.2f}".format(item['equity']) }} AUD</strong></p>
                         </div>
                     </div>
                     <div id="{{item['currency_code']}}" style="margin: 0px;height: 100px;"></div>
@@ -135,7 +135,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["highest_moved"]["amount"] }} Transactions</p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>${{ user_analytics["highest_moved"]["current_price"] }}</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["highest_moved"]["current_price"])}}</strong></p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     <div style="display: flex;margin-bottom: 5px;">
                         <p style="margin-bottom: 0px;color: rgba(176,176,176,0.85);">{{ user_analytics["most_purchased"]["amount"] }} {{ user_analytics["most_purchased"]["currency_code"] }}</p>
                         <div style="width: auto;background: rgba(14,14,14,0);display: inline-block;border-radius: 20px;padding-right: 12px;padding-left: 12px;margin-left: auto;">
-                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>${{ user_analytics["most_purchased"]["total_price"] }}</strong></p>
+                            <p style="margin-bottom: 0px;color: rgb(71,71,71);border-color: rgb(18,18,18);"><strong>{{"${:,.2f}".format(user_analytics["most_purchased"]["total_price"])}}</strong></p>
                         </div>
                     </div>
                 </div>
