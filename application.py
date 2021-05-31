@@ -37,12 +37,12 @@ def fetch_user_analytics():
     )
 
     return json.loads(response['Payload'].read().decode())
-global _user_analytics
 _user_analytics = fetch_user_analytics()
 
 def start_timers():
     end_time = datetime.now() + timedelta(seconds=5)
     while datetime.now() < end_time:
+        global _user_analytics
         _user_analytics = fetch_user_analytics()
 
 start_timers()
