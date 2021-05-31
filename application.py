@@ -24,6 +24,22 @@ dynamodb_resource = boto3.resource('dynamodb', region_name=variables["region_nam
 dynamodb_client = boto3.client('dynamodb', region_name=variables["region_name"])
 lambda_client = boto3.client('lambda', region_name=variables["region_name"])
 
+# Local data
+# Not needed to be updated every single time a user refreshes the page, but stored for faster load times
+# Can be recognized with an underscore prefix
+_user_analytics = {}
+def fetch_user_analytics():
+    lambda_dict = {'test': 'test'}
+    response = lambda_client.invoke(
+        FunctionName='processUserAnalytics',
+        InvocationType='RequestResponse',
+        LogType='Tail',
+        Payload=json.dumps(lambda_dict).encode('utf-8')
+    )
+
+    return json.loads(response['Payload'].read().decode())
+
+
 # Functions
 def auth_login(email, password):
     if 'userid' in session:
@@ -253,15 +269,7 @@ def dashboard():
     for data in stock_data['data']:
         position_total = position_total + data["equity"]
     
-    lambda_dict = {'test': 'test'}
-    response = lambda_client.invoke(
-        FunctionName='processUserAnalytics',
-        InvocationType='RequestResponse',
-        LogType='Tail',
-        Payload=json.dumps(lambda_dict).encode('utf-8')
-    )
-    
-    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), user_analytics=json.loads(response['Payload'].read().decode()))
+    return render_template('dashboard.php', stock_data=stock_data['data'], position_total=round(position_total, 2), user_analytics=_user_analytics)
 # end-dashboard-route
 
 
@@ -371,6 +379,8 @@ def register():
 
 def setup_application():
     existing_tables = dynamodb_client.list_tables()['TableNames']
+    
+    _user_analytics = fetch_user_analytics()
     
     if 'users' not in existing_tables:
         dynamodb_resource.create_table(
