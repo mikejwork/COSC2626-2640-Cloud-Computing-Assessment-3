@@ -476,6 +476,15 @@ def setup_application():
             }
         )
 
+    result2 = db_activitystats.scan(FilterExpression=Attr('stat_name').eq('most_sold'))
+    if result2["Count"] == 0:
+        db_activitystats.put_item(
+            Item={
+                'stat_name': "most_sold",
+                'stat_data': {}
+            }
+        )
+
 setup_application()   
     
         
