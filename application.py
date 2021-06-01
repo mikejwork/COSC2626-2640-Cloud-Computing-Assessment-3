@@ -300,6 +300,7 @@ def closeposition(currency_code):
     if user_owns_stock(currency_code):
         user = get_user(session['userid'])
         db_users = dynamodb_resource.Table('users')
+        db_userActivityData = dynamodb_resource.Table('userActivityData')
 
         new_stocks = []
 
