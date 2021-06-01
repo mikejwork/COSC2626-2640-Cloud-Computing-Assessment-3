@@ -43,56 +43,56 @@
             </div>
 
             <script>
-                var options = {
-                    chart: {
-                        type: 'area',
-                        zoom: {
+                    var options = {
+                        chart: {
+                            type: 'area',
+                            zoom: {
+                                enabled: false
+                            },
+                            toolbar: {
+                                show: false
+                            },
+                            sparkline: {
+                                enabled: false
+                            }
+                        },
+                        series: [{
+                            name: '{{item["currency_code"]}} $ AUD',
+                            data: {{item['pricedata']['prices']}}.reverse()
+                        }],
+                        dataLabels: {
                             enabled: false
                         },
-                        toolbar: {
+                        labels: {{item['pricedata']['dates']}}.reverse(),
+                        grid: {
                             show: false
                         },
-                        sparkline: {
-                            enabled: false
-                        }
-                    },
-                    series: [{
-                        name: '{{item["currency_code"]}} $ AUD',
-                        data: item['pricedata']['prices'].reverse()
-                    }],
-                    dataLabels: {
-                        enabled: false
-                    },
-                    labels: item['pricedata']['dates'].reverse(),
-                    grid: {
-                        show: false
-                    },
-                    xaxis: {
-                        labels: {
-                            show: false
+                        xaxis: {
+                            labels: {
+                                show: false
+                            },
+                            min: 960 
                         },
-                        min: 960
-                    },
-                    yaxis: {
-                        opposite: true,
-                        labels: {
-                            show: false
+                        yaxis: {
+                            opposite: true,
+                            labels: {
+                                show: false
+                            },
+                            axisticks: {
+                                show: false
+                            }
                         },
-                        axisticks: {
-                            show: false
-                        }
-                    },
-                    tooltip: {
-                        enabled: true,
-                        theme: "dark",
-                        x: {
-                            show: false
+                        tooltip: {
+                            enabled: true,
+                            theme: "dark",
+                            x: {
+                                show: false
+                            }
                         }
                     }
-                }
-                var chart = new ApexCharts(document.querySelector("#{{item['currency_code']}}"), options);
-                chart.render();
-            </script>
+                    var chart = new ApexCharts(document.querySelector("#{{item['currency_code']}}"), options);
+                    chart.render();
+                </script>
 
             {% endfor %}
 
