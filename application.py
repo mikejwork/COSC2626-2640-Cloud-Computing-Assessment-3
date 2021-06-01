@@ -437,6 +437,39 @@ def setup_application():
                 'WriteCapacityUnits': 10
             }
         )
+    if 'userActivityStats' not in existing_tables:
+            dynamodb_resource.create_table(
+                TableName='userActivityStats',
+                KeySchema=[
+                    {
+                        'AttributeName': 'stat_name',
+                        'KeyType': 'HASH'
+                    }
+                ],
+                AttributeDefinitions=[
+                    {
+                        'AttributeName': 'stat_name',
+                        'AttributeType': 'S'
+                    }
+                ],
+                ProvisionedThroughput={
+                    'ReadCapacityUnits': 10,
+                    'WriteCapacityUnits': 10
+                }
+            )
+            db_activitystats = dynamodb_resource.Table('userActivityStats')
+            db_activitystats.put_item(
+                Item={
+                    'stat_name': "most_purchased",
+                    'data': {}
+                }
+            )
+            db_activitystats.put_item(
+                Item={
+                    'stat_name': "highest_moved",
+                    'data': {}
+                }
+            )
 
 setup_application()   
     
