@@ -375,8 +375,8 @@ def register():
 
 
 def setup_application():
+    # Setup tables with default data / attributes on first start
     existing_tables = dynamodb_client.list_tables()['TableNames']
-    
     if 'users' not in existing_tables:
         dynamodb_resource.create_table(
             TableName='users',
@@ -465,7 +465,7 @@ def setup_application():
         db_activitystats.put_item(
             Item={
                 'stat_name': "most_purchased",
-                'data': {}
+                'stat_data': {}
             }
         )
 
@@ -474,7 +474,7 @@ def setup_application():
         db_activitystats.put_item(
             Item={
                 'stat_name': "highest_moved",
-                'data': {}
+                'stat_data': {}
             }
         )
 
