@@ -317,6 +317,14 @@ def closeposition(currency_code):
             },
             ReturnValues="UPDATED_NEW"
         )
+
+        response = db_userActivityData.put_item(
+            Item={
+                'dataid': str(uuid.uuid4()),
+                'data_type': "stock_sold",
+                'currency_code': currency_code
+            }
+        )
     
     return redirect(url_for('dashboard'))
 # end-close-position-route

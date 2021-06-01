@@ -22,7 +22,7 @@
         <div class="row g-0 d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
 
             {% for item in stock_data %}
-
+            {{item}}
             <div class="col-auto col-md-3" style="color: rgba(255,255,255,0.85);background: #191919DD;font-family: Ubuntu, sans-serif;border-radius: 10px;padding: 15px;padding-right: 15px;padding-left: 15px;margin-right: 5px;margin-bottom: 5px;">
                 <div style="display: flex;margin-bottom: 5px;">
                     <p style="margin-bottom: 0px;">{{item['currency_code']}} $ AUD<i class="fa fa-question-circle" style="margin-left: 5px;"></i></p>
