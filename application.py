@@ -253,7 +253,7 @@ def dashboard():
     
     db_analytics = dynamodb_resource.Table('userActivityStats')
 
-    _user_analytics = db_analytics.scan()
+    _user_analytics = db_analytics.scan()['Items'][0]
 
     return render_template('dashboard.php', stock_data=stock_data['data'], position_total=position_total, user_analytics=_user_analytics)
 # end-dashboard-route
