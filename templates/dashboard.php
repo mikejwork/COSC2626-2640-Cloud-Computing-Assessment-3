@@ -71,7 +71,7 @@
                             labels: {
                                 show: false
                             },
-                            min: 960 
+                            max: 50 
                         },
                         yaxis: {
                             opposite: true,
