@@ -457,19 +457,26 @@ def setup_application():
                     'WriteCapacityUnits': 10
                 }
             )
-            db_activitystats = dynamodb_resource.Table('userActivityStats')
-            db_activitystats.put_item(
-                Item={
-                    'stat_name': "most_purchased",
-                    'data': {}
-                }
-            )
-            db_activitystats.put_item(
-                Item={
-                    'stat_name': "highest_moved",
-                    'data': {}
-                }
-            )
+
+    db_activitystats = dynamodb_resource.Table('userActivityStats')
+
+    result = db_activitystats.scan(FilterExpression=Attr('stat_name').eq('most_purchased'))
+    if result["Count"] == 0:
+        db_activitystats.put_item(
+            Item={
+                'stat_name': "most_purchased",
+                'data': {}
+            }
+        )
+
+    result1 = db_activitystats.scan(FilterExpression=Attr('stat_name').eq('highest_moved'))
+    if result1["Count"] == 0:
+        db_activitystats.put_item(
+            Item={
+                'stat_name': "highest_moved",
+                'data': {}
+            }
+        )
 
 setup_application()   
     
