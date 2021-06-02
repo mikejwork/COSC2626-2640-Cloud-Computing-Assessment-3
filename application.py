@@ -181,6 +181,22 @@ def changepassword():
         return redirect(url_for('login'))
     
     user = get_user(session['userid'])
+
+    if request.method == "POST":
+        current_password = request.form['current_password']
+        desired_password = request.form['desired_password']
+
+        if not current_password:
+            return render_template('profile.php', error_message="Error: Current password field is empty.")
+
+        if not desired_password:
+            return render_template('profile.php', error_message="Error: Desired password field is empty.")
+
+        if user['password'] == current_password:
+            auth_changepassword(session['userid'], desired_password)
+            return redirect(url_for('profile'))
+        else:
+            return render_template('profile.php', error_message="Error, Current password does not match.")
     
     return redirect(url_for('login'))
 # end-change-password-route
