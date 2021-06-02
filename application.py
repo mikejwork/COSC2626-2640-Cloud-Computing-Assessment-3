@@ -179,10 +179,9 @@ def profile():
 def changepassword():
     if 'userid' not in session:
         return redirect(url_for('login'))
-    
-    user = get_user(session['userid'])
 
     if request.method == "POST":
+        user = get_user(session['userid'])
         current_password = request.form['current_password']
         desired_password = request.form['desired_password']
 
