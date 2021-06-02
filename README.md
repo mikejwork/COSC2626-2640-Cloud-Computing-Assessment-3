@@ -9,9 +9,8 @@ and multiple cloud services
 
 ### Personal Assignment notes:
 From previous assessments within this subject i have become more confident with web applications using AWS.
-I have changed my previous outlook on the assessment from an online store to a budgeting application, to track bank accounts
-and savings, also enabling the user to input the stocks that they own, using a third party API be able to get prices of these stocks
-and show a live price of their assets to the user.
+I have changed my previous outlook on the assessment from an online store to a portfolio application, to track cryptocurrency holdings, enabling the user to input the stocks that they own, using a third party API be able to get prices of these stocks
+and show a price history and equity of their assets to the user.
 
 ## AWS Features / Plan
 I will be hosting the site on AWS Elastic beanstalk which will automatically handle scaling and load balancing for me.
