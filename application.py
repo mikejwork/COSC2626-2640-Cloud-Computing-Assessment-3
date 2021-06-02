@@ -384,7 +384,9 @@ def register():
 # end-register-route
 
 
-
+# setup_application()
+# runs on app startup, to check if relevant DB tables do not exist
+# if they do not exist create them and populate with needed values.
 def setup_application():
     # Setup tables with default data / attributes on first start
     existing_tables = dynamodb_client.list_tables()['TableNames']
@@ -433,13 +435,13 @@ def setup_application():
             TableName='userActivityData',
             KeySchema=[
                 {
-                    'AttributeName': 'data_type',
+                    'AttributeName': 'dataid',
                     'KeyType': 'HASH'
                 }
             ],
             AttributeDefinitions=[
                 {
-                    'AttributeName': 'data_type',
+                    'AttributeName': 'dataid',
                     'AttributeType': 'S'
                 }
             ],
