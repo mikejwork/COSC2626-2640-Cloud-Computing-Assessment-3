@@ -20,5 +20,7 @@ Project is created with:
 ## Assignment notes
 Starting this assignment i was moderately confident with AWS services, after completing i feel much more confident. If i was to go back and re-make this application i would not use python flask, i would instead opt for Node.js and React.js, using AWS Amplify, This would allow me to create a more reactive interface for the user and ease the development experience.
 
+Also i would seperate functions into different files and restructure the app to be more object-oriented. In its current state the code is really unreadable.
+
 ## Showcase
 ![dashboard](/showcase/dashboard.png)
